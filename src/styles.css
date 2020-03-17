@@ -1,0 +1,16 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import url(http://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+
+body {
+  margin: 0;
+  /* 
+  font-family: 'Roboto', sans-serif; 
+  */
+  font-family: "Open Sans Hebrew", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}

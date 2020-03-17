@@ -1,0 +1,35 @@
+<mat-card>
+  <div *ngIf="importFolder; else nothingFound">
+    <div fxLayout="row" class="summary-header">
+      <span class="summary-key">תיקייה:</span><span class="summary-value">{{ importFolder.folderName }}</span>
+      <span class="summary-key">נרשמו:</span><span class="summary-value">{{ importFolder.fileCount }}</span>
+      <span class="summary-key">התחילו:</span><span class="summary-value">{{ statusSummary.started }}</span>
+      <span class="summary-key imported">נקלטו:</span><span class="summary-value">{{ statusSummary.imported }}</span>
+      <span class="summary-key rejected">נפסלו:</span><span class="summary-value">{{ statusSummary.rejected }}</span>
+      <span class="summary-key">בתהליך:</span><span class="summary-value">{{ statusSummary.inProgress }}</span>
+    </div>
+    <div fxLayout="row" class="table-headers">
+      <div fxLayout="column" fxFlex="25%" class="table-column">תאריך</div>
+      <div fxLayout="column" fxFlex="25%" class="table-column">שעה</div>
+      <div fxLayout="column" fxFlex="25%" class="table-column">קובץ</div>
+      <div fxLayout="column" fxFlex="25%" class="table-column">הערות</div>
+    </div>
+    <div fxLayout="row" *ngFor="let file of importFolder.files" class="table-row">
+      <div fxLayout="column" fxFlex="25%" class="table-column">{{ file.importDateFormatted}}</div>
+      <div fxLayout="column" fxFlex="25%" class="table-column">{{ file.importTimeFormatted}}</div>
+      <div fxLayout="column" fxFlex="25%" class="table-column" dir="ltr"
+        [ngClass]="{'imported': file.statusCode > 0, 'rejected':file.statusCode < 0 }">
+        {{ file.fileName }}
+      </div>
+      <div fxLayout="column" fxFlex="25%" class="table-column" dir="ltr">{{ file.warningMessage }}</div>
+    </div>
+  </div>
+  <ng-template #nothingFound>
+    <div>
+      לא מצאתי כלום
+    </div>
+  </ng-template>
+  <button mat-icon-button matTooltip="Back" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</mat-card>

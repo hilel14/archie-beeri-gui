@@ -1,0 +1,130 @@
+<mat-card>
+  <mat-card-content>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>תיקיה</mat-label>
+        <mat-select [(value)]="importAttributes.folderName" matTooltip="בחרו תיקייה המכילה קבצים שברצונכם לקלוט">
+          <mat-option *ngFor="let folder of folders" [value]="folder">
+            {{ folder }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>הוסף שמות קבצים לשדה</mat-label>
+        <mat-select [(value)]="importAttributes.addFileNamesTo">
+          <mat-option value="dcTitle">
+            כותרת
+          </mat-option>
+          <mat-option value="dcDescription">
+            תיאור
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>טיפול בטקסט</mat-label>
+        <mat-select [(value)]="importAttributes.textAction" matTooltip="מה לעשות כאשר תוכן המסמך מכיל טקסט?">
+          <mat-option value="default">
+            לא לעשות כלום
+          </mat-option>
+          <mat-option value="extrat">
+            לשלוף את הטקסט - העתק והדבק
+          </mat-option>
+          <mat-option value="recognize">
+            לנסות לזהות טקסט סרוק באמצעות OCR
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field class="editTextFields">
+        <mat-label>כותרת</mat-label>
+        <input matInput [(ngModel)]="importAttributes.dcTitle" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field class="editTextFields">
+        <mat-label>יוצרים</mat-label>
+        <input matInput [(ngModel)]="dcCreator" matTooltip="שם היוצר, או רשימה של יוצרים, מופרדת באמצעות פסיקים" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>תאריך</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="importAttributes.dcDate" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>סוג</mat-label>
+        <mat-select [(value)]="importAttributes.dcType" matTooltip="סוג המסמך או הפריט">
+          <mat-option value="text">טקסט</mat-option>
+          <mat-option value="image">תמונה</mat-option>
+          <mat-option value="audio">צליל</mat-option>
+          <mat-option value="video">סרט</mat-option>
+          <mat-option value="phisical-object">חפץ</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>סיווג</mat-label>
+        <mat-select [(value)]="importAttributes.dcAccessRights" matTooltip="ציבורי: לכולם מותר לצפות בקובץ, פרטי: רק לתושבי בארי, סודי: רק למנהלות הארכיון.">
+          <mat-option value="public">ציבורי</mat-option>
+          <mat-option value="private">פרטי</mat-option>
+          <mat-option value="secret">סודי</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field class="editTextFields">
+        <mat-label>תיאור</mat-label>
+        <input matInput [(ngModel)]="importAttributes.dcDescription" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field class="editTextFields">
+        <mat-label>מקור/מיקום</mat-label>
+        <input matInput [(ngModel)]="importAttributes.storageLocation" matTooltip="מיקום פיזי בארכיון" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field class="editTextFields">
+        <mat-label>נושאים</mat-label>
+        <input matInput [(ngModel)]="dcSubject" matTooltip="רשימת נושאים מופרדת באמצעות פסיקים" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>אוסף</mat-label>
+        <mat-select [(value)]="importAttributes.dcIsPartOf" matTooltip="בחרו את האוסף שהקבצים הם חלק ממנו">
+          <mat-option *ngFor="let dcCollection of dcCollections" [value]="dcCollection">
+            {{ dcCollection }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!--
+        <mat-form-field class="editTextFields">
+          <mat-label>אוספים</mat-label>
+          <input matInput [(ngModel)]="importAttributes.dcIsPartOf"
+          matTooltip="כל פריט משתייך לאוסף אחד או יותר. השתמשו בסימן >> כדי לתאר היררכיה. דוגמא: אוספים פרטיים >> הסרטים של צבי א." />
+        </mat-form-field>
+      -->
+    </div>
+    <div fxLayout="row">
+      <button matTooltip="התחל בתהליך הקליטה" (click)="import()">
+        קליטה
+      </button>
+      <!--
+      <button mat-icon-button matTooltip="הפעל" (click)="import()">
+        <mat-icon>save</mat-icon>
+      </button>
+    -->
+    </div>
+  </mat-card-content>
+</mat-card>

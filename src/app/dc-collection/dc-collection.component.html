@@ -1,0 +1,25 @@
+<mat-card>
+  <div *ngIf="doc; else collectionNotFound">
+    <div fxLayout="row">
+      <p class="dcTitle">{{ doc.dcTitle }}</p>
+    </div>
+    <div fxLayout="row">
+      <p>{{ doc.dcDescription }}</p>
+    </div>
+    <div fxLayout="row">
+      <button mat-raised-button class="action-links" (click)="searchDocuments()">
+        הצג פריטים
+      </button>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <button mat-icon-button matTooltip="Back" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <ng-template #collectionNotFound>
+    <div>
+      האוסף המבוקש לא קיים או שנמחק
+    </div>
+  </ng-template>
+</mat-card>

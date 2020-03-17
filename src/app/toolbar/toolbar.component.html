@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutGap="20px">
+  <span mat-list-item>
+    שלום
+    <b> {{ getUserInfo() }} </b>
+  </span>
+  <a mat-list-item [routerLink]="'/login'" *ngIf="!getUsersService().getCurrentUser()">כניסה לחשבון</a>
+  <a mat-list-item [routerLink]="'/welcome'" (click)="getUsersService().logout()"
+    *ngIf="getUsersService().getCurrentUser()">יציאה מהחשבון</a>
+  <a mat-list-item [routerLink]="'/welcome'">בית</a>
+  <a mat-list-item [routerLink]="'/search'">חיפוש</a>
+  <a mat-list-item [routerLink]="'/import-folder'" *ngIf="getUsersService().hasPermission('manager')">יבוא תיקיה</a>
+  <a mat-list-item [routerLink]="'/import-folder-report'" *ngIf="getUsersService().hasPermission('manager')">דוחות</a>
+</mat-toolbar>

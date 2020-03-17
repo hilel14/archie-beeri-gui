@@ -1,0 +1,29 @@
+<div fxLayout="row" fxLayoutAlign="center">
+  <div fxLayout="column" fxLayoutGap="1em">
+    <h1 i18n="site header|An introduction header for this site@@introductionHeader">ברוכים הבאים לארכיון קיבוץ בארי</h1>
+    <div>
+      <strong>הארכיון מכיל: </strong>
+      <span>{{ getDcTypeCount("text") }} </span>
+      <span>מסמכי טקסט</span>
+      <span> | </span>
+      <span> {{ getDcTypeCount("image") }} </span>
+      <span>תמונות</span>
+      <span> | </span>
+      <span> {{ getDcTypeCount("audio") }} </span>
+      <span>קבצי אודיו</span>
+      <span> | </span>
+      <span> {{ getDcTypeCount("video") }} </span>
+      <span>סרטוני וידאו</span>
+    </div>
+
+    <mat-form-field appearance="legacy" class="searchbox">
+      <input  #searchBox matInput placeholder="הקלידו מילה או ביטוי לחיפוש, או כוכבית למציאת כל המסמכים." (keyup.enter)="search(searchBox.value)">
+      <mat-icon matSuffix ngOnc>search</mat-icon>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="search(searchBox.value)">
+      חיפוש
+    </button>
+
+  </div>
+</div>

@@ -1,0 +1,58 @@
+mat-icon {
+  color: black;
+}
+
+.dcTitle {
+  font-size: x-large;
+  color: black;
+}
+
+.dcCreator,
+.dcDate {
+  font-style: italic;
+  color: grey;
+}
+
+.dcDescription {
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+
+.labels {
+  font-weight: bold;
+  margin-left: 1em;
+}
+
+.action-link {
+  padding-left: 0.5em;
+}
+
+.preview {
+  max-height: 400px;
+  max-width: 400px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.results-row,
+.results-column {
+  padding: 1em;
+}
+
+.results-column {
+  width: 400px;
+}
+
+.sorter-row {
+  margin-top: 2em;
+}
+
+.button-row button,
+.button-row a {
+  margin-left: 8px;
+}
+
+.resultSummary {
+  color: darkgray;
+}

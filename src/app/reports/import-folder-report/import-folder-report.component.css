@@ -1,0 +1,18 @@
+.table-headers {
+  font-weight: bold;
+}
+
+.table-headers,
+.table-row {
+  border-bottom: 1px solid black;
+  padding: 1em 0;
+}
+
+.table-column {
+  text-align: right;
+}
+
+.active {
+  color: white;
+  background: gray;
+}

@@ -1,0 +1,15 @@
+mat-card {
+  padding: 1em;
+}
+
+.editTextFields {
+  width: 75%;
+}
+
+.dcTitle {
+  font-size: x-large;
+  color: black;
+}
+.action-links {
+  margin-left: 1em;
+}

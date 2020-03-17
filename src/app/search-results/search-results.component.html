@@ -1,0 +1,184 @@
+<mat-card>
+  <div fxLayout="column" fxLayoutGap="1em">
+    <div fxLayout="row" fxLayoutGap="1em">
+      <mat-form-field appearance="legacy" class="searchbox">
+        <input matInput placeholder="חיפוש מלה או ביטוי" [(ngModel)]="searchBox" (keyup.enter)="getSearchResults()" />
+        <mat-icon matSuffix ngOnc>search</mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="במסמכים מסוג" [(ngModel)]="dcTypeFilter" (selectionChange)="getSearchResults()">
+          <mat-option *ngFor="let dcType of dcTypes" [value]="dcType.value">
+            {{ dcType.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="מאת" [(ngModel)]="dcCreatorFilter" (selectionChange)="getSearchResults()">
+          <mat-option *ngFor="let dcCreator of dcCreators" [value]="dcCreator">
+            {{ dcCreator }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="startDatePicker" placeholder="מתאריך" [(ngModel)]="startDateFilter"
+          (dateChange)="getSearchResults()" (click)="resetStartDatePicker($event)" readonly />
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="endDatePicker" placeholder="עד תאריך" [(ngModel)]="endDateFilter"
+          (dateChange)="getSearchResults()" (click)="resetEndDatePicker($event)" readonly />
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="באוסף" [(ngModel)]="dcCollectionFilter" (selectionChange)="getSearchResults()">
+          <mat-option *ngFor="let dcCollection of dcCollections" [value]="dcCollection">
+            {{ dcCollection }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="dataSource.length > 0; else nothingFound">
+      <div fxLayout="row" fxLayoutAlign="start">
+        <div class="resultSummary">
+          נמצאו
+          {{ totalDocumentsFound }}
+          מסמכים
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of dataSource" class="results-row">
+        <div fxLayout="column" fxLayoutGap="0.1em" class="results-column">
+          <div fxLayout="row">
+            <p class="dcTitle">
+              {{ element.dcTitle }}
+            </p>
+          </div>
+          <div fxLayout="row" *ngIf="element.dcCreator">
+            <span class="labels">יוצרים: </span>
+            <span>
+              {{ element.dcCreator }}
+            </span>
+          </div>
+          <div fxLayout="row" *ngIf="element.dcDate">
+            <span class="labels">תאריך: </span>
+            <span>
+              <span class="dcDate">
+                <!-- DatePipe = {{ value_expression | date [ : format [ : timezone [ : locale ] ] ] }} -->
+                {{ element.dcDate | date: "longDate":undefined:"he" }}
+              </span>
+            </span>
+          </div>
+          <div fxLayout="row">
+            <span class="labels">סוג: </span>
+            <span>
+              {{ getDcTypeLabel(element.dcType) }}
+            </span>
+          </div>
+          <div fxLayout="row" *ngIf="element.dcFormat">
+            <span class="labels">פורמט: </span>
+            <span>
+              {{ element.dcFormat }}
+            </span>
+          </div>
+          <div fxLayout="row">
+            <span class="labels">סיווג: </span>
+            <span>
+              {{ element.dcAccessRights }}
+            </span>
+          </div>
+          <div fxLayout="row" *ngIf="element.dcDescription">
+            <p class="dcDescription">
+              {{ element.dcDescription }}
+            </p>
+          </div>
+          <div fxLayout="row" *ngIf="element.dcIsPartOf">
+            <span class="labels">אוסף: </span>
+            <span>
+              <a routerLink="/collection/{{element.dcIsPartOf}}">
+                {{ element.dcIsPartOf }}
+              </a>
+            </span>
+          </div>
+          <div fxLayout="row" *ngIf="element.dcSubject">
+            <span class="labels">נושאים: </span>
+            <span *ngFor="let subject of element.dcSubject" class="action-link">
+              <!-- <a routerLink="/search/dcSubject:{{subject}}">{{ subject }}</a> -->
+              {{subject}} |
+            </span>
+          </div>
+          <div fxLayout="row" *ngIf="element.storageLocation">
+            <span class="labels">מיקום: </span>
+            <span>
+              {{ element.storageLocation }}
+            </span>
+          </div>
+
+          <div fxLayout="row" class="button-row">
+            <a href="{{ getDownloadLink(element) }}" *ngIf="element.dcFormat">
+              <button mat-icon-button matTooltip="Download">
+                <mat-icon>cloud_download</mat-icon>
+              </button>
+            </a>
+            <a routerLink="/edit/{{ element.id }}">
+              <button mat-icon-button matTooltip="Edit" *ngIf="usersService.hasPermission('manager')">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </a>
+            <button mat-icon-button matTooltip="Delete" (click)="deleteDocument(element)"
+              *ngIf="usersService.hasPermission('manager')">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div fxLayout="column" class="results-column">
+          <div fxLayout="row" [ngSwitch]="getPreviewTag(element)">
+            <img *ngSwitchCase="'img'" src="{{ getPreviewLink(element) }}" alt="image not found" class="preview" />
+            <audio *ngSwitchCase="'audio'" controls src="{{ getPreviewLink(element) }}" class="preview"></audio>
+            <video *ngSwitchCase="'video'" controls src="{{ getPreviewLink(element) }}" class="preview"></video>
+            <p *ngSwitchCase="unsupported">
+              File is missing or preview is not supported
+            </p>
+            <p *ngSwitchDefault>File is missing or preview is not available</p>
+          </div>
+        </div>
+
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start" class="sorter-row">
+        <!-- Paginator -->
+        <mat-paginator [length]="totalDocumentsFound" [pageSize]="numberOfRows" [pageSizeOptions]="[1, 5, 10, 25, 100]"
+          (page)="onPaginateChange($event)">
+        </mat-paginator>
+        <!-- sort field -->
+        <mat-form-field>
+          <mat-select placeholder="מיין לפי" [(ngModel)]="sortField" (selectionChange)="getSearchResults()">
+            <mat-option *ngFor="let sortField of sortFields" [value]="sortField.value">
+              {{ sortField.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- sort order -->
+        <mat-form-field>
+          <mat-select placeholder="בסדר" [(ngModel)]="sortOrder" (selectionChange)="getSearchResults()">
+            <mat-option value="asc">
+              עולה
+            </mat-option>
+            <mat-option value="desc">
+              יורד
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button matTooltip="Export" (click)="getSearchResultsAsCsv()">
+          יצא תוצאות חיפוש לקובץ
+        </button>
+      </div>
+    </div>
+
+    <ng-template #nothingFound>
+      <div>
+        לא מצאתי כלום
+      </div>
+    </ng-template>
+  </div>
+</mat-card>

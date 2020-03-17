@@ -1,0 +1,89 @@
+<mat-card>
+  <div *ngIf="doc">
+    <div fxLayout="row">
+      <img src="{{ getPreviewLink(doc) }}" alt="image not found" class="preview" />
+    </div>
+    <div fxLayout="row">
+      <mat-form-field class="editTextFields">
+        <mat-label>כותרת</mat-label>
+        <input matInput [(ngModel)]="doc.dcTitle" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>יוצרים</mat-label>
+        <input multiple matInput [(ngModel)]="dcCreators" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>תאריך</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="doc.dcDate" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>סוג</mat-label>
+        <mat-select [(value)]="doc.dcType">
+          <mat-option *ngFor="let dcType of getDcTypes()" [value]="dcType">
+            {{ dcType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>סיווג</mat-label>
+        <mat-select [(value)]="doc.dcAccessRights">
+          <mat-option *ngFor="let dcAccessRights of getAccessRights()" [value]="dcAccessRights">
+            {{ dcAccessRights }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" *ngIf="doc.dcType !== 'collection'">
+      <mat-form-field>
+        <mat-label>פורמט</mat-label>
+        <input matInput [(ngModel)]="doc.dcFormat" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field class="editTextFields">
+        <mat-label>תיאור</mat-label>
+        <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10"
+          [(ngModel)]="doc.dcDescription"></textarea>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field class="editTextFields">
+        <mat-label>אוספים</mat-label>
+        <input matInput [(ngModel)]="doc.dcIsPartOf" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>נושאים</mat-label>
+        <input matInput [(ngModel)]="dcSubjects" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-label>מיקום</mat-label>
+        <input matInput [(ngModel)]="doc.storageLocation" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <button mat-icon-button matTooltip="Save" (click)="saveDocument()">
+        <mat-icon>save</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Cancel" (click)="goBack()">
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Back" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>

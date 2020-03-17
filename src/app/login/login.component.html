@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1em">
+  <div fxLayout="column" fxLayoutGap="1em">
+    <p>
+      כניסה לחשבון נדרשת רק לצרכי עריכה.
+      לחיפוש מסמכים הקישו
+      <a [routerLink]="'/search'">כאן</a>
+      .
+    </p>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1em">
+  <div fxLayout="column" fxLayoutGap="1em">
+    <mat-form-field appearance="legacy">
+      <input matInput placeholder="שם משתמש" [(ngModel)]="username" />
+    </mat-form-field>
+    <mat-form-field appearance="legacy">
+      <input type="password" matInput placeholder="סיסמא" [(ngModel)]="password" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="login()">כניסה לחשבון</button>
+  </div>
+</div>
