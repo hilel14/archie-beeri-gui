@@ -1,4 +1,12 @@
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+/*
+Angular Material pre-built themes:
+  deeppurple-amber.css
+  indigo-pink.css
+  pink-bluegrey.css
+  purple-green.css
+*/
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url(http://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
 
 body {
@@ -6,8 +14,7 @@ body {
   /* 
   font-family: 'Roboto', sans-serif; 
   */
-  font-family: "Open Sans Hebrew", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  font-family: "Open Sans Hebrew", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 html,

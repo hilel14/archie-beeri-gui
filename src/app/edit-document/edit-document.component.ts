@@ -14,7 +14,8 @@ export class EditDocumentComponent implements OnInit {
   doc: ArchieDoc;
   dcCreators: string;
   dcSubjects: string;
-  dcCollections: string;
+  dcCollection: string;
+  dcCollections: (string)[];
 
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +24,25 @@ export class EditDocumentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getAllCollections();
     this.getDocDetails();
+  }
+
+  getAllCollections(): void {
+    this.archieDocumentService
+      .getAllCollections()
+      .subscribe((data: any) => this.initCollectionsList(data));
+  }
+
+  initCollectionsList(data: any): void {
+    let results = data["response"]["docs"];
+    let collections: string[] = [];
+    for (let i = 0; i < results.length; i++) {
+      collections.push(results[i]["dcTitleString"]);
+    }
+    collections.sort();
+    collections.unshift(undefined);
+    this.dcCollections = collections;
   }
 
   getDocDetails(): void {
@@ -42,7 +61,7 @@ export class EditDocumentComponent implements OnInit {
       this.dcSubjects = this.doc.dcSubject.toString();
     }
     if (this.doc.dcIsPartOf) {
-      this.dcCollections = this.doc.dcIsPartOf.toString();
+      this.dcCollection = this.doc.dcIsPartOf.toString();
     }
   }
 
