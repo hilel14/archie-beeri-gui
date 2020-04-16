@@ -85,11 +85,11 @@ export class EditDocumentComponent implements OnInit {
   saveDocument(): void {
     // creators
     if (this.dcCreators) {
-      this.doc.dcCreator = this.dcCreators.split(",");
+      this.doc.dcCreator = this.dcCreators.split(",").map(Function.prototype.call, String.prototype.trim);
     }
     // subjects
     if (this.dcSubjects) {
-      this.doc.dcSubject = this.dcSubjects.split(",");
+      this.doc.dcSubject = this.dcSubjects.split(",").map(Function.prototype.call, String.prototype.trim);
     }
     this.archieDocumentService
       .updateDocument(this.doc)

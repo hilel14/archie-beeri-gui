@@ -37,7 +37,7 @@ export class ArchieDocumentService {
   getDcCreators(): Observable<any> {
     let url =
       this.docsUrl +
-      "&q=*:*&fl=id&facet=on&facet.field=dcCreator&facet.sort=index";
+      "&q=*:*&fl=id&facet=on&facet.field=dcCreator&facet.sort=index&facet.limit=1000000";
     return this.http
       .get<any>(url)
       .pipe(catchError(this.handleError("getCreators", [])));
