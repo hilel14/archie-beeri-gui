@@ -48,18 +48,10 @@ export class ImportFolderComponent implements OnInit {
     this.dcCollections = collections;
   }
 
-  initCollectionsList2(data: any): void {
-    let facets = data["facet_counts"]["facet_fields"]["dcTitleString"];
-    let collections: string[] = [];
-    for (let i = 0; i < facets.length; i += 2) {
-      collections.push(facets[i].trim());
-    }
-    collections.sort();
-    collections.unshift(undefined);
-    this.dcCollections = collections;
-  }
-
   import(): void {
+    if (!this.validateUserInput()) {
+      return;
+    }
     // dc creators
     if (this.dcCreator) {
       this.importAttributes.dcCreators = [];
@@ -75,9 +67,46 @@ export class ImportFolderComponent implements OnInit {
       .importFolder(this.importAttributes)
       .subscribe((data: any) => this.postImport(data));
   }
+
+  validateUserInput() {
+    // folderName
+    if (!this.importAttributes.folderName) {
+      alert("select folder-name");
+      return false;
+    }
+    // addFileNamesTo
+    if (!this.importAttributes.addFileNamesTo) {
+      alert("select add-file-names-to");
+      return false;
+    }
+    // textAction
+    if (!this.importAttributes.textAction) {
+      alert("select text-action");
+      return false;
+    }
+    // dcType
+    if (!this.importAttributes.dcType) {
+      alert("select type");
+      return false;
+    }
+    // dcAccessRights
+    if (!this.importAttributes.dcAccessRights) {
+      alert("select access-rights");
+      return false;
+    }
+    // dcIsPartOf
+    if (!this.importAttributes.dcIsPartOf) {
+      alert("select collection");
+      return false;
+    }
+    // valid
+    return true;
+  }
+
   postImport(data: any): void {
     console.log("postImportFolder: " + data);
     alert("הקבצים נשלחו לשרת לקליטה - לחצו אישור לצפייה בדוח");
     this.router.navigate(["/import-folder-report"]);
   }
+
 }
