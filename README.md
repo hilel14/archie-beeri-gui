@@ -47,12 +47,6 @@ https://angular.io/guide/i18n
   * Manually install netbeanstypescript-3.0.1.nbm ?
 * https://netbeans.org/bugzilla/show_bug.cgi?id=257587
 
-## Production
-* ng build --prod --base-href /archie/beeri/gui/ --i18n-file src/locale/messages.he.xlf --i18n-format xlf --i18n-locale he
-* cp ../api/src/setup/httpd/archie.beeri.htaccess dist/archie-beeri-ui/.htaccess
-* sudo rm -rf /var/www/archie/beeri
-* sudo mv dist/archie-beeri-ui /var/www/archie/beeri
-
 ## Development
 * ng serve --base-href /archie/beeri/dev/
 * ng generate component edit-document --module app
