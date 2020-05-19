@@ -14,6 +14,9 @@
       <mat-form-field>
         <mat-label>הוסף שמות קבצים לשדה</mat-label>
         <mat-select [(value)]="importAttributes.addFileNamesTo">
+          <mat-option value="do-nothing">
+            אל תוסיף
+          </mat-option>
           <mat-option value="dcTitle">
             כותרת
           </mat-option>
@@ -27,7 +30,7 @@
       <mat-form-field>
         <mat-label>טיפול בטקסט</mat-label>
         <mat-select [(value)]="importAttributes.textAction" matTooltip="מה לעשות כאשר תוכן המסמך מכיל טקסט?">
-          <mat-option value="default">
+          <mat-option value="do-nothing">
             לא לעשות כלום
           </mat-option>
           <mat-option value="extrat">
@@ -67,14 +70,15 @@
           <mat-option value="image">תמונה</mat-option>
           <mat-option value="audio">צליל</mat-option>
           <mat-option value="video">סרט</mat-option>
-          <mat-option value="phisical-object">חפץ</mat-option>
+          <mat-option value="other">אחר</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div fxLayout="row">
       <mat-form-field>
         <mat-label>סיווג</mat-label>
-        <mat-select [(value)]="importAttributes.dcAccessRights" matTooltip="ציבורי: לכולם מותר לצפות בקובץ, פרטי: רק לתושבי בארי, סודי: רק למנהלות הארכיון.">
+        <mat-select [(value)]="importAttributes.dcAccessRights"
+          matTooltip="ציבורי: לכולם מותר לצפות בקובץ, פרטי: רק לתושבי בארי, סודי: רק למנהלות הארכיון.">
           <mat-option value="public">ציבורי</mat-option>
           <mat-option value="private">פרטי</mat-option>
           <mat-option value="secret">סודי</mat-option>
@@ -89,7 +93,7 @@
     </div>
     <div fxLayout="row">
       <mat-form-field class="editTextFields">
-        <mat-label>מקור/מיקום</mat-label>
+        <mat-label>מיקום</mat-label>
         <input matInput [(ngModel)]="importAttributes.storageLocation" matTooltip="מיקום פיזי בארכיון" />
       </mat-form-field>
     </div>

@@ -23,6 +23,7 @@ export class ImportFolderComponent implements OnInit {
   ngOnInit() {
     this.initFoldersList();
     this.getAllCollections();
+    this.setDefaults();
   }
 
   initFoldersList(): void {
@@ -35,6 +36,11 @@ export class ImportFolderComponent implements OnInit {
     this.archieDocumentService
       .getAllCollections()
       .subscribe((data: any) => this.initCollectionsList(data));
+  }
+
+  setDefaults(): void {
+    this.importAttributes.dcAccessRights = "private";
+    this.importAttributes.textAction = "do-nothing";
   }
 
   initCollectionsList(data: any): void {
@@ -71,33 +77,40 @@ export class ImportFolderComponent implements OnInit {
   validateUserInput() {
     // folderName
     if (!this.importAttributes.folderName) {
-      alert("select folder-name");
+      alert("תיקייה: שכחת לבחור תיקיה עם קבצים ליבוא");
       return false;
     }
     // addFileNamesTo
     if (!this.importAttributes.addFileNamesTo) {
-      alert("select add-file-names-to");
+      alert("הוסף שמות קבצים לשדה: שכחת לבחור פעולה מהרשימה");
       return false;
     }
     // textAction
     if (!this.importAttributes.textAction) {
-      alert("select text-action");
+      alert("טיפול בטקסט: שכחת לבחור פעולה מהרשימה");
       return false;
     }
     // dcType
     if (!this.importAttributes.dcType) {
-      alert("select type");
+      alert("סוג: שכחת לבחור מהרשימה את הקטגוריה אליה משתייכים הקבצים");
       return false;
     }
     // dcAccessRights
     if (!this.importAttributes.dcAccessRights) {
-      alert("select access-rights");
+      alert("סיווג: שכחת לבחור את רמת הסיווג מהרשימה");
       return false;
     }
     // dcIsPartOf
     if (!this.importAttributes.dcIsPartOf) {
-      alert("select collection");
+      alert("אוסף: שכחת לבחור את האוסף אליו שייכים הקבצים");
       return false;
+    }
+    // title can't be empty
+    if (this.importAttributes.addFileNamesTo === "do-nothing") {
+      if (!this.importAttributes.dcTitle) {
+        alert("לכל מסמך צריך שתהיה כותרת");
+        return;
+      }
     }
     // valid
     return true;
