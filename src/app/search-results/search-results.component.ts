@@ -368,8 +368,13 @@ export class SearchResultsComponent implements OnInit {
   }
 
   getDcTypeLabel(dcType: string): string {
-    let dcTypeObject: SelectOption = this.dcTypes.filter(item => item.value === dcType)[0];
-    return dcTypeObject.viewValue;
+    let dcTypeObjects: SelectOption[] = this.dcTypes.filter(item => item.value === dcType);
+    if (dcTypeObjects.length > 0) {
+      return dcTypeObjects[0].viewValue;
+    } else {
+      console.log("unknown dcType: " + dcType);
+      return "?";
+    }
   }
 
   onPaginateChange(event) {
