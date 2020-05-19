@@ -73,15 +73,6 @@ export class EditDocumentComponent implements OnInit {
     return "/assetstore/" + doc.dcAccessRights + "/preview/" + doc.id + ".png";
   }
 
-  getDcTypes(): string[] {
-    return ["text", "image", "audio", "video", "phisical-object", "collection"];
-  }
-
-  getAccessRights(): string[] {
-    return ["public", "private", "secret"];
-  }
-
-
   saveDocument(): void {
     // creators
     if (this.dcCreators) {

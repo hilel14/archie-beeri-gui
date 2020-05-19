@@ -1,7 +1,13 @@
 <mat-card>
   <div *ngIf="doc">
-    <div fxLayout="row">
-      <img src="{{ getPreviewLink(doc) }}" alt="image not found" class="preview" />
+    <div fxLayout="row" *ngIf="doc.dcFormat">
+      <img src="{{ getPreviewLink(doc) }}" alt="image not found" />
+    </div>
+    <div fxLayout="row" *ngIf="doc.dcFormat">
+      <p class="preview">
+        קובץ בפורמט
+        {{ doc.dcFormat }}
+      </p>
     </div>
     <div fxLayout="row">
       <mat-form-field class="editTextFields">
@@ -26,27 +32,24 @@
     <div fxLayout="row">
       <mat-form-field>
         <mat-label>סוג</mat-label>
-        <mat-select [(value)]="doc.dcType">
-          <mat-option *ngFor="let dcType of getDcTypes()" [value]="dcType">
-            {{ dcType }}
-          </mat-option>
+        <mat-select [(value)]="doc.dcType" matTooltip="סוג המסמך או הפריט">
+          <mat-option value="text">טקסט</mat-option>
+          <mat-option value="image">תמונה</mat-option>
+          <mat-option value="audio">צליל</mat-option>
+          <mat-option value="video">סרט</mat-option>
+          <mat-option value="other">אחר</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div fxLayout="row">
       <mat-form-field>
         <mat-label>סיווג</mat-label>
-        <mat-select [(value)]="doc.dcAccessRights">
-          <mat-option *ngFor="let dcAccessRights of getAccessRights()" [value]="dcAccessRights">
-            {{ dcAccessRights }}
-          </mat-option>
+        <mat-select [(value)]="doc.dcAccessRights"
+          matTooltip="ציבורי: לכולם מותר לצפות בקובץ, פרטי: רק לתושבי בארי, סודי: רק למנהלות הארכיון.">
+          <mat-option value="public">ציבורי</mat-option>
+          <mat-option value="private">פרטי</mat-option>
+          <mat-option value="secret">סודי</mat-option>
         </mat-select>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" *ngIf="doc.dcType !== 'collection'">
-      <mat-form-field>
-        <mat-label>פורמט</mat-label>
-        <input matInput [(ngModel)]="doc.dcFormat" readonly />
       </mat-form-field>
     </div>
     <div fxLayout="row">
@@ -57,13 +60,9 @@
       </mat-form-field>
     </div>
     <div fxLayout="row">
-      <mat-form-field>
-        <mat-label>אוספים</mat-label>
-        <mat-select placeholder="באוסף" [(ngModel)]="doc.dcIsPartOf">
-          <mat-option *ngFor="let dcCollection of dcCollections" [value]="dcCollection">
-            {{ dcCollection }}
-          </mat-option>
-        </mat-select>
+      <mat-form-field class="editTextFields">
+        <mat-label>מיקום</mat-label>
+        <input matInput [(ngModel)]="doc.storageLocation" />
       </mat-form-field>
     </div>
     <div fxLayout="row">
@@ -73,9 +72,13 @@
       </mat-form-field>
     </div>
     <div fxLayout="row">
-      <mat-form-field class="editTextFields">
-        <mat-label>מיקום</mat-label>
-        <input matInput [(ngModel)]="doc.storageLocation" />
+      <mat-form-field>
+        <mat-label>אוסף</mat-label>
+        <mat-select placeholder="באוסף" [(ngModel)]="doc.dcIsPartOf">
+          <mat-option *ngFor="let dcCollection of dcCollections" [value]="dcCollection">
+            {{ dcCollection }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
     <div fxLayout="row">
