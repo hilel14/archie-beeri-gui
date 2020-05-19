@@ -75,7 +75,7 @@ export class SearchResultsComponent implements OnInit {
       { value: "image", viewValue: "תמונה" },
       { value: "audio", viewValue: "צליל" },
       { value: "video", viewValue: "סרטון" },
-      { value: "phisical-object", viewValue: "חפץ" }
+      { value: "other", viewValue: "אחר" }
       //"collection"
     ];
   }
