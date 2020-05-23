@@ -46,7 +46,7 @@ export class ArchieDocumentService {
   getAllCollections(): Observable<any> {
     let url =
       this.docsUrl +
-      "&q=dcType:collection&fl=dcTitleString&rows=1000";
+      "&q=dcType:collection&fl=dcTitleString&sort=dcTitleString asc&rows=1000";
     return this.http
       .get<any>(url)
       .pipe(catchError(this.handleError("getAllCollections", [])));

@@ -28,7 +28,7 @@ export class SearchResultsComponent implements OnInit {
   numberOfRows: number = this.defaultNumberOfRows;
   searchBox: string;
   searchQuery: string;
-  dcCreators: (string)[];
+  dcCreators: SelectOption[];
   dcCreatorFilter: string;
   dcTypes: SelectOption[];
   dcTypeFilter: string;
@@ -37,7 +37,7 @@ export class SearchResultsComponent implements OnInit {
   sortFields: SelectOption[];
   dcSubject: string;
   dcCollectionFilter: string;
-  dcCollections: (string)[];
+  dcCollections: SelectOption[];
   dcTitleString: string;
   sortField: string = "dcDate";
   sortOrder: string = "asc";
@@ -70,7 +70,7 @@ export class SearchResultsComponent implements OnInit {
 
   initDcTypeList(): void {
     this.dcTypes = [
-      { value: undefined, viewValue: "" },
+      { value: undefined, viewValue: "הכל" },
       { value: "text", viewValue: "טקסט" },
       { value: "image", viewValue: "תמונה" },
       { value: "audio", viewValue: "צליל" },
@@ -94,23 +94,23 @@ export class SearchResultsComponent implements OnInit {
 
   initCreatorsList(data: any): void {
     let facets = data["facet_counts"]["facet_fields"]["dcCreator"];
-    let creators: string[] = [];
+    let creators: SelectOption[] = [];
     for (let i = 0; i < facets.length; i += 2) {
-      creators.push(facets[i].trim());
+      creators.push({ value: facets[i].trim(), viewValue: facets[i].trim() });
     }
-    creators.sort();
-    creators.unshift(undefined);
+    //creators.sort();
+    creators.unshift({ value: undefined, viewValue: "כולם" });
     this.dcCreators = creators;
   }
 
   initCollectionsList(data: any): void {
     let results = data["response"]["docs"];
-    let collections: string[] = [];
+    let collections: SelectOption[] = [];
     for (let i = 0; i < results.length; i++) {
-      collections.push(results[i]["dcTitleString"]);
+      collections.push({ value: results[i]["dcTitleString"], viewValue: results[i]["dcTitleString"] });
     }
-    collections.sort();
-    collections.unshift(undefined);
+    //collections.sort();
+    collections.unshift({ value: undefined, viewValue: "כולם" });
     this.dcCollections = collections;
   }
 
