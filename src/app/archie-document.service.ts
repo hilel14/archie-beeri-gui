@@ -80,6 +80,7 @@ export class ArchieDocumentService {
   ): Observable<any> {
     let url =
       this.docsUrl +
+      "&q.op=AND" +
       "&" +
       searchParams +
       "&fl=id,dcTitle,dcDate,dcCreator,dcDescription,dcSubject,storageLocation,dcFormat,dcType,dcIsPartOf,dcAccessRights,importTime" +
