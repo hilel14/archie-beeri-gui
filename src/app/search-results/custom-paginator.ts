@@ -5,7 +5,7 @@ export class MatPaginatorIntlHeb extends MatPaginatorIntl {
   nextPageLabel = "העמוד הבא";
   previousPageLabel = "העמוד הקודם";
 
-  getRangeLabel = function (page, pageSize, length) {
+  getRangeLabel = function (page: number, pageSize: number, length: number) {
     if (length === 0 || pageSize === 0) {
       return "0 מתוך " + length;
     }

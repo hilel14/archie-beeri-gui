@@ -137,7 +137,7 @@ export class SearchResultsComponent implements OnInit {
   getSearchResultsAsCsv(): void {
     this.buildSolrSearchQuery();
     this.archieDocumentService
-      .getSearchResultsAsCsv(this.searchQuery)
+      .getSearchResultsAsCsv(this.searchQuery, this.totalDocumentsFound)
       .subscribe((data: any) => this.exportSearchResults(data));
   }
 
@@ -312,7 +312,7 @@ export class SearchResultsComponent implements OnInit {
 
   processSearchResults(data: any) {
     this.dataSource = data["response"]["docs"];
-    this.totalDocumentsFound = +data["response"]["numFound"];
+    this.totalDocumentsFound = data["response"]["numFound"];
   }
 
   deleteDocument(doc: ArchieDoc): void {

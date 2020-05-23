@@ -94,13 +94,13 @@ export class ArchieDocumentService {
       .pipe(catchError(this.handleError("getSearchResults", [])));
   }
 
-  getSearchResultsAsCsv(searchParams: string): Observable<any> {
+  getSearchResultsAsCsv(searchParams: string, totalDocumentsFound: number): Observable<any> {
     let url =
       this.exportUrl +
       "&" +
       searchParams +
+      "&rows=" + totalDocumentsFound +
       "&fl=id,dcTitle,dcDate,dcCreator,dcDescription,dcSubject,storageLocation,dcFormat,dcType,dcIsPartOf,dcAccessRights";
-    //console.log(url);
     return this.http.get(url, {
       //headers: new HttpHeaders({ "Content-Type": "text/plain" })
       responseType: "text"
