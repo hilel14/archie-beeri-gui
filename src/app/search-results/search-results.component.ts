@@ -3,12 +3,13 @@ import { Router, ActivatedRoute, Params, ParamMap } from "@angular/router";
 import { Location } from "@angular/common";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { saveAs } from 'file-saver';
-
-import { ArchieDocumentService } from "../archie-document.service";
-import { ArchieDoc } from "../model/archie-doc";
-import { UsersService } from "../users.service";
 import { stringify } from "@angular/compiler/src/util";
 import { isNgTemplate } from "@angular/compiler";
+
+import { ArchieDocumentService } from "../archie-document.service";
+import { UsersService } from "../users.service";
+import { StorageService } from "../storage.service";
+import { ArchieDoc } from "../model/archie-doc";
 
 export interface SelectOption {
   value: string;
@@ -46,9 +47,10 @@ export class SearchResultsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
+    public dialog: MatDialog,
     private archieDocumentService: ArchieDocumentService,
     private usersService: UsersService,
-    public dialog: MatDialog
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
@@ -324,7 +326,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   getDownloadLink(element: ArchieDoc) {
-    return "/assetstore/" + element.dcAccessRights + "/assets/" + element.id + "." + element.dcFormat;
+    return this.storageService.getUrl(element.dcAccessRights, "originals", element.id, element.dcFormat);
   }
 
   getPreviewTag(element: ArchieDoc): string {
@@ -352,15 +354,14 @@ export class SearchResultsComponent implements OnInit {
   }
 
 
-  getPreviewLink(element: ArchieDoc) {
-    //console.log("getPreviewLink " + this.getPreviewTag(element.dcFormat));
+  getThumbnailLink(element: ArchieDoc) {
     switch (this.getPreviewTag(element)) {
       case "img":
-        return "/assetstore/" + element.dcAccessRights + "/preview/" + element.id + ".png";
+        return this.storageService.getUrl(element.dcAccessRights, "thumbnails", element.id, "png");
       case "audio":
       case "video":
         return (
-          "/assetstore/" + element.dcAccessRights + "/assets/" + element.id + "." + element.dcFormat
+          this.getDownloadLink(element)
         );
       default:
         return undefined;

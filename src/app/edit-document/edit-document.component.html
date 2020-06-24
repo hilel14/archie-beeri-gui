@@ -1,7 +1,7 @@
 <mat-card>
   <div *ngIf="doc">
     <div fxLayout="row" *ngIf="doc.dcFormat">
-      <img src="{{ getPreviewLink(doc) }}" alt="image not found" />
+      <img src="{{ getThumbnailLink(doc) }}" alt="image not found" />
     </div>
     <div fxLayout="row" *ngIf="doc.dcFormat">
       <p class="preview">

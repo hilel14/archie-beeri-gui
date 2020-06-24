@@ -134,9 +134,9 @@
 
         <div fxLayout="column" class="results-column">
           <div fxLayout="row" [ngSwitch]="getPreviewTag(element)">
-            <img *ngSwitchCase="'img'" src="{{ getPreviewLink(element) }}" alt="image not found" class="preview" />
-            <audio *ngSwitchCase="'audio'" controls src="{{ getPreviewLink(element) }}" class="preview"></audio>
-            <video *ngSwitchCase="'video'" controls src="{{ getPreviewLink(element) }}" class="preview"></video>
+            <img *ngSwitchCase="'img'" src="{{ getThumbnailLink(element) }}" alt="image not found" class="preview" />
+            <audio *ngSwitchCase="'audio'" controls src="{{ getThumbnailLink(element) }}" class="preview"></audio>
+            <video *ngSwitchCase="'video'" controls src="{{ getThumbnailLink(element) }}" class="preview"></video>
             <p *ngSwitchCase="unsupported">
               File is missing or preview is not supported
             </p>

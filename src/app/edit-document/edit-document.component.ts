@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { ArchieDocumentService } from "../archie-document.service";
+import { StorageService } from "../storage.service";
 import { ArchieDoc } from "../model/archie-doc";
 
 @Component({
@@ -20,7 +21,8 @@ export class EditDocumentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private archieDocumentService: ArchieDocumentService
+    private archieDocumentService: ArchieDocumentService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
@@ -69,8 +71,8 @@ export class EditDocumentComponent implements OnInit {
     this.location.back();
   }
 
-  getPreviewLink(doc: ArchieDoc) {
-    return "/assetstore/" + doc.dcAccessRights + "/preview/" + doc.id + ".png";
+  getThumbnailLink(doc: ArchieDoc) {
+    return this.storageService.getUrl(doc.dcAccessRights, "thumbnails", doc.id, "png");
   }
 
   saveDocument(): void {
