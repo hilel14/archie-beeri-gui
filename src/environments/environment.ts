@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  assetStore: {
+    public: "https://archie-beeri-public-test.s3-eu-west-1.amazonaws.com",
+    private: "https://archie-beeri-private-test.s3-eu-west-1.amazonaws.com"
+  }
 };
 
 /*
