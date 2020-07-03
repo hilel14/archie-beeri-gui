@@ -60,13 +60,11 @@ export class ImportFolderComponent implements OnInit {
     }
     // dc creators
     if (this.dcCreator) {
-      this.importAttributes.dcCreators = [];
-      this.importAttributes.dcCreators.push(this.dcCreator);
+      this.importAttributes.dcCreators = this.dcCreator.split(",").map(Function.prototype.call, String.prototype.trim);
     }
     // dc subjects
     if (this.dcSubject) {
-      this.importAttributes.dcSubjects = [];
-      this.importAttributes.dcSubjects.push(this.dcSubject);
+      this.importAttributes.dcSubjects = this.dcSubject.split(",").map(Function.prototype.call, String.prototype.trim);
     }
     // post
     this.archieDocumentService
