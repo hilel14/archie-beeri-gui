@@ -7,7 +7,8 @@ export const environment = {
   assetStore: {
     public: "https://archie-beeri-public-test.s3-eu-west-1.amazonaws.com",
     private: "https://archie-beeri-private-test.s3-eu-west-1.amazonaws.com"
-  }
+  },
+  version: "2.0.1-SNAPSHOT"
 };
 
 /*
@@ -17,3 +18,20 @@ export const environment = {
  * because it will have a performance impact when errors are thrown
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+/*
+
+Release workflow:
+
+1. Commit changes
+2. Change version field in environment.ts and environment.prod.ts to the next version 
+   and remove the SNAPSHOT suffix.
+3. Commit changes
+4. Create tag archie-beeri-gui-x.y.z
+   Example: archie-beeri-gui-1.0.0
+5. Change version field in environment.ts and environment.prod.ts to x.y.z-SNAPSHOT 
+   where x.y.z is the next bugfix version.
+   Example: 1.0.1-SNAPSHOT
+6. Commit changes
+
+*/

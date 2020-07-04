@@ -9,10 +9,12 @@ import { ImportFileReportComponent } from "./reports/import-file-report/import-f
 import { ImportFolderReportComponent } from "./reports/import-folder-report/import-folder-report.component";
 import { SearchResultsComponent } from "./search-results/search-results.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
+import { AboutComponent } from "./about/about.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/welcome", pathMatch: "full" },
   { path: "login", component: LoginComponent },
+  { path: "about", component: AboutComponent },
   { path: "welcome", component: WelcomeComponent },
   { path: "search", component: SearchResultsComponent },
   { path: "edit/:docId", component: EditDocumentComponent },

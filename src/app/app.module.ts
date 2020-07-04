@@ -22,6 +22,7 @@ import { ImportFolderReportComponent } from "./reports/import-folder-report/impo
 import { SearchResultsComponent } from "./search-results/search-results.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
+import { AboutComponent } from './about/about.component';
 
 registerLocaleData(localeHe, "he", localeHeExtra);
 
@@ -36,7 +37,8 @@ registerLocaleData(localeHe, "he", localeHeExtra);
     ImportFileReportComponent,
     ImportFolderComponent,
     LoginComponent,
-    DcCollectionComponent
+    DcCollectionComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

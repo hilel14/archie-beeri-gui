@@ -10,4 +10,5 @@
   <a mat-list-item [routerLink]="'/search'">חיפוש</a>
   <a mat-list-item [routerLink]="'/import-folder'" *ngIf="getUsersService().hasPermission('manager')">יבוא תיקיה</a>
   <a mat-list-item [routerLink]="'/import-folder-report'" *ngIf="getUsersService().hasPermission('manager')">דוחות</a>
+  <a mat-list-item [routerLink]="'/about'">אודות</a>  
 </mat-toolbar>
