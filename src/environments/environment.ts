@@ -8,7 +8,7 @@ export const environment = {
     public: "https://archie-beeri-public-test.s3-eu-west-1.amazonaws.com",
     private: "https://archie-beeri-private-test.s3-eu-west-1.amazonaws.com"
   },
-  version: "2.0.0"
+  version: "2.0.1-SNAPSHOT"
 };
 
 /*
@@ -34,6 +34,6 @@ Release workflow:
 5. Change version field in environment.ts and environment.prod.ts to x.y.z-SNAPSHOT 
    where x.y.z is the next bugfix version.
    Example: 1.0.1-SNAPSHOT
-6. Commit changes
+6. Commit changes. Message: prepare for next development iteration.
 
 */
