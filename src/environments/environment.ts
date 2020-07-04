@@ -8,7 +8,7 @@ export const environment = {
     public: "https://archie-beeri-public-test.s3-eu-west-1.amazonaws.com",
     private: "https://archie-beeri-private-test.s3-eu-west-1.amazonaws.com"
   },
-  version: "2.0.1-SNAPSHOT"
+  version: "2.0.0"
 };
 
 /*
@@ -26,7 +26,9 @@ Release workflow:
 1. Commit changes
 2. Change version field in environment.ts and environment.prod.ts to the next version 
    and remove the SNAPSHOT suffix.
-3. Commit changes
+   Example: 1.0.0
+3. Commit changes. Message: prepare release archie-beeri-gui-x.y.z
+   Example: prepare release archie-beeri-gui-1.0.0
 4. Create tag archie-beeri-gui-x.y.z
    Example: archie-beeri-gui-1.0.0
 5. Change version field in environment.ts and environment.prod.ts to x.y.z-SNAPSHOT 
