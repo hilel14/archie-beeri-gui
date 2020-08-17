@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 
+import { environment } from '../environments/environment';
 import { ArchieDoc } from "./model/archie-doc";
 import { ImportAttributes } from "./model/import-attributes";
 
@@ -22,9 +23,9 @@ export class ArchieDocumentService {
   private apiUrl: string;
 
   constructor(private http: HttpClient) {
-    this.docsUrl = window.location.origin + "/docs?wt=json&indent=on";
-    this.exportUrl = window.location.origin + "/docs?wt=csv";
-    this.apiUrl = window.location.origin + "/api/rest";
+    this.docsUrl = environment.locationOrigin + "/docs?wt=json&indent=on";
+    this.exportUrl = environment.locationOrigin + "/docs?wt=csv";
+    this.apiUrl = environment.locationOrigin + "/api/rest";
   }
 
   getDcTypes(): Observable<any> {

@@ -5,6 +5,7 @@ import { Observable, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Credentials } from "./model/credentials";
 import { User } from "./model/user";
+import { environment } from "src/environments/environment";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -17,7 +18,7 @@ export class UsersService {
   private baseUrl: string;
 
   constructor(private router: Router, private http: HttpClient) {
-    this.baseUrl = window.location.origin + "/api/rest/users/";
+    this.baseUrl = environment.locationOrigin + "/api/rest/users/";
   }
 
   login(username: string, password: string) {
