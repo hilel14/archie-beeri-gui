@@ -241,12 +241,12 @@ export class SearchResultsComponent implements OnInit {
     // Add dcType filter to search query
     if (this.dcTypeFilter) {
       this.searchQuery += "&fq=dcType:" + this.dcTypeFilter;
+    } else {
+      this.searchQuery += "&fq=!dcType:collection";
     }
     // Add dcCreator filter
     if (this.dcCreatorFilter) {
       this.searchQuery += "&fq=dcCreator:" + '"' + this.dcCreatorFilter + '"';
-    } else {
-      this.searchQuery += "&fq=!dcType:collection";
     }
     // dcTitle
     if (this.dcTitleString) {
