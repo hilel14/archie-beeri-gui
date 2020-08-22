@@ -25,8 +25,8 @@ export interface SelectOption {
 export class SearchResultsComponent implements OnInit {
   dataSource: ArchieDoc[] = [];
   totalDocumentsFound: number = 0;
-  firstRow: number = 0;
-  defaultNumberOfRows = 1;
+  firstRow: number = 1;
+  defaultNumberOfRows = 5;
   numberOfRows: number = this.defaultNumberOfRows;
   searchBox: string;
   searchQuery: string;
@@ -191,7 +191,7 @@ export class SearchResultsComponent implements OnInit {
       this.sortField = params.get("sortField") ? params.get("sortField") : "dcDate";
       this.sortOrder = params.get("sortOrder") ? params.get("sortOrder") : "asc";
       // first and number of rows
-      this.firstRow = params.get("firstRow") ? params.get("firstRow") : 0;
+      this.firstRow = params.get("firstRow") ? params.get("firstRow") : 1;
       this.numberOfRows =
         params.get("numberOfRows")
           ? params.get("numberOfRows")
@@ -378,10 +378,20 @@ export class SearchResultsComponent implements OnInit {
       return "?";
     }
   }
+
+  nextPageDisabled(): boolean {
+    return Number(this.firstRow) + Number(this.numberOfRows) > Number(this.totalDocumentsFound);
+  }
+
   nextPage() {
     this.firstRow = Number(this.firstRow) + Number(this.numberOfRows)
     this.getSearchResults();
   }
+
+  previousPageDisabled(): boolean {
+    return Number(this.firstRow) - Number(this.numberOfRows) <= 0;
+  }
+
   previousPage() {
     this.firstRow = Number(this.firstRow) - Number(this.numberOfRows)
     this.getSearchResults();

@@ -85,7 +85,7 @@ export class ArchieDocumentService {
       searchParams +
       "&fl=id,dcTitle,dcDate,dcCreator,dcDescription,dcSubject,storageLocation,dcFormat,dcType,dcIsPartOf,dcAccessRights,importTime" +
       "&start=" +
-      start +
+      (start - 1) +
       "&rows=" +
       rows;
     console.log(url);

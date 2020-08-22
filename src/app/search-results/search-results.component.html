@@ -144,8 +144,8 @@
           </div>
         </div>
       </div>
+      <!-- Paginator -->
       <div fxLayout="row" fxLayoutAlign="start" class="sorter-row">
-        <!-- Paginator -->
         <mat-form-field>
           <mat-select placeholder="פריטים בעמוד" [(ngModel)]="numberOfRows" (selectionChange)="getSearchResults()">
             <mat-option value="1">
@@ -157,19 +157,26 @@
             <mat-option value="10">
               10
             </mat-option>
+            <mat-option value="25">
+              25
+            </mat-option>
+            <mat-option value="100">
+              100
+            </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
           <mat-label>פריט מספר</mat-label>
-          <input matInput [(ngModel)]="firstRow" (keyup.enter)="getSearchResults()" />
+          <input matInput matTooltip="הקלידו מספר פריט ולחצו על Enter" [(ngModel)]="firstRow" (keyup.enter)="getSearchResults()" />
         </mat-form-field>
-        <button mat-button matTooltip="דפדף לפריט הקודם" (click)="previousPage()">
+        <button mat-button [disabled]="previousPageDisabled()" matTooltip="דפדף לפריט הקודם" (click)="previousPage()">
           הקודם
         </button>
-        <button mat-button matTooltip="דפדף לפריט הבא" (click)="nextPage()">
+        <button mat-button [disabled]="nextPageDisabled()" matTooltip="דפדף לפריט הבא" (click)="nextPage()">
           הבא
         </button>
       </div>
+      <!-- sort -->
       <div fxLayout="row" fxLayoutAlign="start" class="sorter-row">
         <!-- sort field -->
         <mat-form-field>
@@ -191,6 +198,7 @@
           </mat-select>
         </mat-form-field>
       </div>
+      <!-- export -->
       <div fxLayout="row" fxLayoutAlign="start" class="sorter-row">
         <button mat-raised-button matTooltip="Export" (click)="getSearchResultsAsCsv()">
           יצא תוצאות חיפוש לקובץ
