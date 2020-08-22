@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { Router, ActivatedRoute, Params, ParamMap } from "@angular/router";
 import { Location } from "@angular/common";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
@@ -10,6 +10,7 @@ import { ArchieDocumentService } from "../archie-document.service";
 import { UsersService } from "../users.service";
 import { StorageService } from "../storage.service";
 import { ArchieDoc } from "../model/archie-doc";
+
 
 export interface SelectOption {
   value: string;
@@ -377,11 +378,12 @@ export class SearchResultsComponent implements OnInit {
       return "?";
     }
   }
-
-  onPaginateChange(event) {
-    //alert(JSON.stringify("Current page index: " + event.pageIndex));
-    this.firstRow = event.pageIndex * event.pageSize;
-    this.numberOfRows = event.pageSize;
+  nextPage() {
+    this.firstRow = Number(this.firstRow) + Number(this.numberOfRows)
+    this.getSearchResults();
+  }
+  previousPage() {
+    this.firstRow = Number(this.firstRow) - Number(this.numberOfRows)
     this.getSearchResults();
   }
 

@@ -143,13 +143,34 @@
             <p *ngSwitchDefault>File is missing or preview is not available</p>
           </div>
         </div>
-
       </div>
       <div fxLayout="row" fxLayoutAlign="start" class="sorter-row">
         <!-- Paginator -->
-        <mat-paginator [length]="totalDocumentsFound" [pageSize]="numberOfRows" [pageSizeOptions]="[1, 5, 10, 25, 100]"
-          (page)="onPaginateChange($event)">
-        </mat-paginator>
+        <mat-form-field>
+          <mat-select placeholder="פריטים בעמוד" [(ngModel)]="numberOfRows" (selectionChange)="getSearchResults()">
+            <mat-option value="1">
+              1
+            </mat-option>
+            <mat-option value="5">
+              5
+            </mat-option>
+            <mat-option value="10">
+              10
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>פריט מספר</mat-label>
+          <input matInput [(ngModel)]="firstRow" (keyup.enter)="getSearchResults()" />
+        </mat-form-field>
+        <button mat-button matTooltip="דפדף לפריט הקודם" (click)="previousPage()">
+          הקודם
+        </button>
+        <button mat-button matTooltip="דפדף לפריט הבא" (click)="nextPage()">
+          הבא
+        </button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start" class="sorter-row">
         <!-- sort field -->
         <mat-form-field>
           <mat-select placeholder="מיין לפי" [(ngModel)]="sortField" (selectionChange)="getSearchResults()">
@@ -169,7 +190,9 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-button matTooltip="Export" (click)="getSearchResultsAsCsv()">
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start" class="sorter-row">
+        <button mat-raised-button matTooltip="Export" (click)="getSearchResultsAsCsv()">
           יצא תוצאות חיפוש לקובץ
         </button>
       </div>
