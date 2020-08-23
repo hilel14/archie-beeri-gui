@@ -397,4 +397,14 @@ export class SearchResultsComponent implements OnInit {
     this.getSearchResults();
   }
 
+  jumpToPage() {
+    this.firstRow = this.firstRow > this.totalDocumentsFound ? this.totalDocumentsFound : this.firstRow;
+    this.getSearchResults();
+  }
+
+  searchParamsChanged() {
+    this.firstRow = 1;
+    this.getSearchResults();
+  }
+
 }

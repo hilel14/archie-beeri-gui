@@ -2,18 +2,18 @@
   <div fxLayout="column" fxLayoutGap="1em">
     <div fxLayout="row" fxLayoutGap="1em">
       <mat-form-field appearance="legacy" class="searchbox">
-        <input matInput placeholder="חיפוש מלה או ביטוי" [(ngModel)]="searchBox" (keyup.enter)="getSearchResults()" />
+        <input matInput placeholder="חיפוש מלה או ביטוי" [(ngModel)]="searchBox" (keyup.enter)="searchParamsChanged()" />
         <mat-icon matSuffix ngOnc>search</mat-icon>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="במסמכים מסוג" [(ngModel)]="dcTypeFilter" (selectionChange)="getSearchResults()">
+        <mat-select placeholder="במסמכים מסוג" [(ngModel)]="dcTypeFilter" (selectionChange)="searchParamsChanged()">
           <mat-option *ngFor="let dcType of dcTypes" [value]="dcType.value">
             {{ dcType.viewValue }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="מאת" [(ngModel)]="dcCreatorFilter" (selectionChange)="getSearchResults()">
+        <mat-select placeholder="מאת" [(ngModel)]="dcCreatorFilter" (selectionChange)="searchParamsChanged()">
           <mat-option *ngFor="let dcCreator of dcCreators" [value]="dcCreator.value">
             {{ dcCreator.viewValue }}
           </mat-option>
@@ -21,18 +21,18 @@
       </mat-form-field>
       <mat-form-field>
         <input matInput [matDatepicker]="startDatePicker" placeholder="מתאריך" [(ngModel)]="startDateFilter"
-          (dateChange)="getSearchResults()" (click)="resetStartDatePicker($event)" readonly />
+          (dateChange)="searchParamsChanged()" (click)="resetStartDatePicker($event)" readonly />
         <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #startDatePicker></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
         <input matInput [matDatepicker]="endDatePicker" placeholder="עד תאריך" [(ngModel)]="endDateFilter"
-          (dateChange)="getSearchResults()" (click)="resetEndDatePicker($event)" readonly />
+          (dateChange)="searchParamsChanged()" (click)="resetEndDatePicker($event)" readonly />
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #endDatePicker></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="באוסף" [(ngModel)]="dcCollectionFilter" (selectionChange)="getSearchResults()">
+        <mat-select placeholder="באוסף" [(ngModel)]="dcCollectionFilter" (selectionChange)="searchParamsChanged()">
           <mat-option *ngFor="let dcCollection of dcCollections" [value]="dcCollection.value">
             {{ dcCollection.viewValue }}
           </mat-option>
@@ -167,7 +167,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>פריט מספר</mat-label>
-          <input matInput matTooltip="הקלידו מספר פריט ולחצו על Enter" [(ngModel)]="firstRow" (keyup.enter)="getSearchResults()" />
+          <input matInput matTooltip="הקלידו מספר פריט ולחצו על Enter" [(ngModel)]="firstRow" (keyup.enter)="jumpToPage()" />
         </mat-form-field>
         <button mat-button [disabled]="previousPageDisabled()" matTooltip="דפדף לפריט הקודם" (click)="previousPage()">
           הקודם
