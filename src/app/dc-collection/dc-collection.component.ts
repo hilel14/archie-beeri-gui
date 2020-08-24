@@ -29,7 +29,7 @@ export class DcCollectionComponent implements OnInit {
     const dcTitle = '"' + this.route.snapshot.paramMap.get("dcTitle") + '"';
     console.log(dcTitle);
     this.archieDocumentService
-      .getSearchResults("q=dcType:collection&fq=dcTitleString:" + dcTitle, 0, 1)
+      .getSearchResults("q=dcType:collection&fq=dcTitleString:" + dcTitle, 1, 1)
       .subscribe((data: any) => this.processSearchResults(data));
   }
 
