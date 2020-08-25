@@ -9,7 +9,7 @@ export const environment = {
       private: "https://archie-beeri-private-test.s3-eu-west-1.amazonaws.com"
    },
    locationOrigin: "http://localhost",
-   version: "2.0.1-SNAPSHOT"
+   version: "2.1.1-SNAPSHOT"
 };
 
 /*

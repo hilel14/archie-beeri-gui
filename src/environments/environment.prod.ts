@@ -5,5 +5,5 @@ export const environment = {
     private: "https://archie-beeri-private.s3-eu-west-1.amazonaws.com"
   },
   locationOrigin: window.location.origin,
-  version: "2.0.1-SNAPSHOT"
+  version: "2.1.0"
 };
