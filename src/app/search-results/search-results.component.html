@@ -2,7 +2,8 @@
   <div fxLayout="column" fxLayoutGap="1em">
     <div fxLayout="row" fxLayoutGap="1em">
       <mat-form-field appearance="legacy" class="searchbox">
-        <input matInput placeholder="חיפוש מלה או ביטוי" [(ngModel)]="searchBox" (keyup.enter)="searchParamsChanged()" />
+        <input matInput placeholder="חיפוש מלה או ביטוי" [(ngModel)]="searchBox"
+          (keyup.enter)="searchParamsChanged()" />
         <mat-icon matSuffix ngOnc>search</mat-icon>
       </mat-form-field>
       <mat-form-field>
@@ -40,12 +41,71 @@
       </mat-form-field>
     </div>
     <div *ngIf="dataSource.length > 0; else nothingFound">
+      <!--
       <div fxLayout="row" fxLayoutAlign="start">
         <div class="resultSummary">
           נמצאו
           {{ totalDocumentsFound }}
           מסמכים
         </div>
+      </div>
+      -->
+      <div class="sorter-row">
+        <mat-form-field>
+          <mat-label>פריט מספר</mat-label>
+          <input matInput matTooltip="הקלידו מספר פריט ולחצו על Enter" [(ngModel)]="firstRow"
+            (keyup.enter)="jumpToPage()" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>פריטים שנמצאו בחיפוש הנוכחי</mat-label>
+          <input matInput disabled="true" [ngModel]="totalDocumentsFound" />
+        </mat-form-field>
+        <!-- Paginator -->
+        <mat-form-field>
+          <mat-select placeholder="פריטים בעמוד" [(ngModel)]="numberOfRows" (selectionChange)="getSearchResults()">
+            <mat-option value="1">
+              1
+            </mat-option>
+            <mat-option value="5">
+              5
+            </mat-option>
+            <mat-option value="10">
+              10
+            </mat-option>
+            <mat-option value="25">
+              25
+            </mat-option>
+            <mat-option value="100">
+              100
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button [disabled]="previousPageDisabled()" matTooltip="דפדף אל קבוצת הפריטים הקודמת" (click)="previousPage()">
+          אחורה
+        </button>
+        <button mat-button [disabled]="nextPageDisabled()" matTooltip="דפדף אל קבוצת הפריטים הבאה" (click)="nextPage()">
+          קדימה
+        </button>
+        <!-- sort -->
+        <!-- sort field -->
+        <mat-form-field>
+          <mat-select placeholder="מיין לפי" [(ngModel)]="sortField" (selectionChange)="getSearchResults()">
+            <mat-option *ngFor="let sortField of sortFields" [value]="sortField.value">
+              {{ sortField.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- sort order -->
+        <mat-form-field>
+          <mat-select placeholder="בסדר" [(ngModel)]="sortOrder" (selectionChange)="getSearchResults()">
+            <mat-option value="asc">
+              עולה
+            </mat-option>
+            <mat-option value="desc">
+              יורד
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let element of dataSource" class="results-row">
         <div fxLayout="column" fxLayoutGap="0.1em" class="results-column">
@@ -143,60 +203,6 @@
             <p *ngSwitchDefault>File is missing or preview is not available</p>
           </div>
         </div>
-      </div>
-      <!-- Paginator -->
-      <div fxLayout="row" fxLayoutAlign="start" class="sorter-row">
-        <mat-form-field>
-          <mat-select placeholder="פריטים בעמוד" [(ngModel)]="numberOfRows" (selectionChange)="getSearchResults()">
-            <mat-option value="1">
-              1
-            </mat-option>
-            <mat-option value="5">
-              5
-            </mat-option>
-            <mat-option value="10">
-              10
-            </mat-option>
-            <mat-option value="25">
-              25
-            </mat-option>
-            <mat-option value="100">
-              100
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>פריט מספר</mat-label>
-          <input matInput matTooltip="הקלידו מספר פריט ולחצו על Enter" [(ngModel)]="firstRow" (keyup.enter)="jumpToPage()" />
-        </mat-form-field>
-        <button mat-button [disabled]="previousPageDisabled()" matTooltip="דפדף לפריט הקודם" (click)="previousPage()">
-          הקודם
-        </button>
-        <button mat-button [disabled]="nextPageDisabled()" matTooltip="דפדף לפריט הבא" (click)="nextPage()">
-          הבא
-        </button>
-      </div>
-      <!-- sort -->
-      <div fxLayout="row" fxLayoutAlign="start" class="sorter-row">
-        <!-- sort field -->
-        <mat-form-field>
-          <mat-select placeholder="מיין לפי" [(ngModel)]="sortField" (selectionChange)="getSearchResults()">
-            <mat-option *ngFor="let sortField of sortFields" [value]="sortField.value">
-              {{ sortField.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- sort order -->
-        <mat-form-field>
-          <mat-select placeholder="בסדר" [(ngModel)]="sortOrder" (selectionChange)="getSearchResults()">
-            <mat-option value="asc">
-              עולה
-            </mat-option>
-            <mat-option value="desc">
-              יורד
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
       </div>
       <!-- export -->
       <div fxLayout="row" fxLayoutAlign="start" class="sorter-row">
