@@ -5,8 +5,8 @@
 export const environment = {
    production: false,
    assetStore: {
-      public: "https://archie-beeri-public-test.s3-eu-west-1.amazonaws.com",
-      private: "https://archie-beeri-private-test.s3-eu-west-1.amazonaws.com"
+      public: "http://localhost/assetstore/public",
+      private: "http://localhost/assetstore/private"
    },
    locationOrigin: "http://localhost",
    version: "2.1.1-SNAPSHOT"

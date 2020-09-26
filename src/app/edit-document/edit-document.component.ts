@@ -50,7 +50,7 @@ export class EditDocumentComponent implements OnInit {
   getDocDetails(): void {
     const docId = this.route.snapshot.paramMap.get("docId");
     this.archieDocumentService
-      .getSearchResults("q=id:" + docId, 1, 1)
+      .getSearchResults("q=id:" + docId, 1, 1, true)
       .subscribe((data: any) => this.processSearchResults(data));
   }
 
