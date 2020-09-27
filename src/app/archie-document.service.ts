@@ -112,13 +112,12 @@ export class ArchieDocumentService {
     }).pipe(catchError(this.handleError("getSearchResultsAsCsv", [])));
   }
 
-  updateDocument(doc: ArchieDoc): Observable<any> {
-    let url = this.apiUrl + "/docs";
-    let docs: ArchieDoc[] = [doc];
+  updateDocument(id: string, record: any): Observable<any> {
+    let url = this.apiUrl + "/docs/update/" + id;
     //console.log(url);
-    console.log("updating doc " + JSON.stringify(docs));
+    //console.log("updating doc " + JSON.stringify(docs));
     return this.http
-      .put(url, docs, httpOptions)
+      .put(url, record, httpOptions)
       .pipe(catchError(this.handleError("updateDocument", [])));
   }
 

@@ -1,15 +1,16 @@
 export interface ArchieDoc {
   id: string;
   dcTitle: string;
-  dcDate: string;
-  dcCreator: Array<string>;
-  dcDescription: string;
-  dcSubject: Array<string>;
-  storageLocation: string;
-  dcFormat: string;
+  dcDate?: string;
+  dcCreator?: Array<string>;
+  dcDescription?: string;
+  dcSubject?: Array<string>;
+  storageLocation?: string;
+  dcFormat?: string;
   dcType: string;
   dcIsPartOf: string;
-  dcAccessRights:string;
+  dcAccessRights: string;
   importTime: string;
-  sortCode: number;
+  sortCode?: number;
+  content?: string;
 }

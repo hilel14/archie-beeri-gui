@@ -16,10 +16,21 @@
       </mat-form-field>
     </div>
     <div fxLayout="row">
-      <mat-form-field class="editTextFields">
-        <mat-label>יוצרים</mat-label>
-        <input multiple matInput [(ngModel)]="dcCreators" />
-      </mat-form-field>
+      <div fxLayout="column" fxLayoutAlign="center center" style="margin-left: 1em;">
+        יוצרים
+      </div>
+      <div fxLayout="column" *ngFor="let creator of doc.dcCreator; let i = index; trackBy:trackByFn">
+        <mat-form-field>
+          <mat-label>יוצר {{ i+1 }}</mat-label>
+          <input matInput [(ngModel)]="doc.dcCreator[i]" (ngModelChange)="trimCreator(i)" />
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center center" style="margin-right: 1em;">
+        <mat-form-field>
+          <mat-label>הוסף יוצר</mat-label>
+          <input matInput [(ngModel)]="newCreator" (keyup.enter)="addCreator();" matTooltip="הקלידו את שם היוצר והקישו אנטר" />
+        </mat-form-field>
+      </div>
     </div>
     <div fxLayout="row">
       <mat-form-field>
@@ -66,10 +77,21 @@
       </mat-form-field>
     </div>
     <div fxLayout="row">
-      <mat-form-field class="editTextFields">
-        <mat-label>נושאים</mat-label>
-        <input matInput [(ngModel)]="dcSubjects" />
-      </mat-form-field>
+      <div fxLayout="column" fxLayoutAlign="center center" style="margin-left: 1em;">
+        נושאים
+      </div>
+      <div fxLayout="column" *ngFor="let subject of doc.dcSubject; let i = index; trackBy:trackByFn">
+        <mat-form-field>
+          <mat-label>נושא {{ i+1 }}</mat-label>
+          <input matInput [(ngModel)]="doc.dcSubject[i]" (ngModelChange)="trimSubject(i)" />
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center center" style="margin-right: 1em;">
+        <mat-form-field>
+          <mat-label>הוסף נושא</mat-label>
+          <input matInput [(ngModel)]="newSubject" (keyup.enter)="addSubject();" matTooltip="הקלידו נושא והקישו אנטר" />
+        </mat-form-field>
+      </div>
     </div>
     <div fxLayout="row">
       <mat-form-field>

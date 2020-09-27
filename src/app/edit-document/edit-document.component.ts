@@ -12,9 +12,10 @@ import { ArchieDoc } from "../model/archie-doc";
   styleUrls: ["./edit-document.component.css"]
 })
 export class EditDocumentComponent implements OnInit {
+  orig: ArchieDoc;
   doc: ArchieDoc;
-  dcCreators: string;
-  dcSubjects: string;
+  newCreator: string;
+  newSubject: string;
   dcCollection: string;
   dcCollections: (string)[];
 
@@ -56,15 +57,44 @@ export class EditDocumentComponent implements OnInit {
 
   processSearchResults(data: any) {
     this.doc = data["response"]["docs"][0];
-    if (this.doc.dcCreator) {
-      this.dcCreators = this.doc.dcCreator.toString();
-    }
-    if (this.doc.dcSubject) {
-      this.dcSubjects = this.doc.dcSubject.toString();
-    }
+    this.orig = JSON.parse(JSON.stringify(this.doc));
     if (this.doc.dcIsPartOf) {
       this.dcCollection = this.doc.dcIsPartOf.toString();
     }
+
+  }
+
+  addCreator() {
+    if (this.doc.dcCreator === undefined) {
+      this.doc.dcCreator = new Array();
+    }
+    this.doc.dcCreator.push(this.newCreator);
+    this.newCreator = undefined;
+  }
+
+  trimCreator(i: number) {
+    if (this.doc.dcCreator[i].trim().length === 0) {
+      this.doc.dcCreator.splice(i, 1);
+    }
+  }
+
+  addSubject() {
+    if (this.doc.dcSubject === undefined) {
+      this.doc.dcSubject = new Array();
+    }
+    this.doc.dcSubject.push(this.newSubject);
+    this.newSubject = undefined;
+  }
+
+  trimSubject(i: number) {
+    if (this.doc.dcSubject[i].trim().length === 0) {
+      this.doc.dcSubject.splice(i, 1);
+    }
+  }
+
+  trackByFn(index: any, item: any) {
+    // Fix dynamic input field lose focus when input changes bug
+    return index;
   }
 
   goBack(): void {
@@ -75,17 +105,43 @@ export class EditDocumentComponent implements OnInit {
     return this.storageService.getUrl(doc.dcAccessRights, "thumbnails", doc.id, "png");
   }
 
+  arraysEqual(array1: Array<string>, array2: Array<string>): boolean {
+    if (!array1 && !array2) {
+      return true;
+    }
+    if (!array1 || !array2) {
+      return false;
+    }
+    if (array1.length != array2.length) {
+      return false;
+    }
+    return array1.every(function (element, index) {
+      return element === array2[index];
+    });
+  }
+
   saveDocument(): void {
-    // creators
-    if (this.dcCreators) {
-      this.doc.dcCreator = this.dcCreators.split(",").map(Function.prototype.call, String.prototype.trim);
+    let record = {};
+    // strings
+    ["dcTitle", "dcDate", "dcType", "dcDescription", "storageLocation", "dcIsPartOf", "dcAccessRights"].forEach((field) => {
+      if (this.doc[field] != this.orig[field]) {
+        record[field] = this.doc[field];
+      }
+    });
+    // arrays
+    ["dcSubject", "dcCreator"].forEach((field) => {
+      if (!this.arraysEqual(this.doc[field], this.orig[field])) {
+        record[field] = this.doc[field];
+      }
+    });
+    // special fields
+    if (record["dcAccessRights"]) {
+      record["dcFormat"] = this.doc.dcFormat;
     }
-    // subjects
-    if (this.dcSubjects) {
-      this.doc.dcSubject = this.dcSubjects.split(",").map(Function.prototype.call, String.prototype.trim);
-    }
+    // submit update
+    console.log(record);
     this.archieDocumentService
-      .updateDocument(this.doc)
+      .updateDocument(this.doc.id, record)
       //.subscribe((data: any) => console.log(data));
       .subscribe(() => this.goBack());
   }
