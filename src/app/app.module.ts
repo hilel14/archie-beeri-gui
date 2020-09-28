@@ -23,6 +23,7 @@ import { SearchResultsComponent } from "./search-results/search-results.componen
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { AboutComponent } from './about/about.component';
+import { RemarksDialogComponent } from './remarks-dialog/remarks-dialog.component';
 
 registerLocaleData(localeHe, "he", localeHeExtra);
 
@@ -38,7 +39,8 @@ registerLocaleData(localeHe, "he", localeHeExtra);
     ImportFolderComponent,
     LoginComponent,
     DcCollectionComponent,
-    AboutComponent
+    AboutComponent,
+    RemarksDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,9 @@ registerLocaleData(localeHe, "he", localeHeExtra);
     MaterialModule
     //JwtModule.forRoot({})
     //JwtModule
+  ],
+  entryComponents: [
+    RemarksDialogComponent
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "he" },

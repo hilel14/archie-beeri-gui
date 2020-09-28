@@ -8,6 +8,7 @@ import { catchError, map, tap } from "rxjs/operators";
 import { environment } from '../environments/environment';
 import { ArchieDoc } from "./model/archie-doc";
 import { ImportAttributes } from "./model/import-attributes";
+import { Remarks } from "./model/remarks";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -133,6 +134,13 @@ export class ArchieDocumentService {
     return this.http
       .delete(url, httpOptions)
       .pipe(catchError(this.handleError("deleteDocument", [])));
+  }
+
+  addRemarks(remakrs: Remarks): Observable<any> {
+    let url = this.apiUrl + "/docs/remarks";
+    return this.http
+      .post(url, remakrs, httpOptions)
+      .pipe(catchError(this.handleError("addRemarks", [])));
   }
 
   /**

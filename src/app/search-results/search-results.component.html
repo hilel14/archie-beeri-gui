@@ -80,7 +80,8 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-button [disabled]="previousPageDisabled()" matTooltip="דפדף אל קבוצת הפריטים הקודמת" (click)="previousPage()">
+        <button mat-button [disabled]="previousPageDisabled()" matTooltip="דפדף אל קבוצת הפריטים הקודמת"
+          (click)="previousPage()">
           אחורה
         </button>
         <button mat-button [disabled]="nextPageDisabled()" matTooltip="דפדף אל קבוצת הפריטים הבאה" (click)="nextPage()">
@@ -176,16 +177,19 @@
 
           <div fxLayout="row" class="button-row">
             <a href="{{ getDownloadLink(element) }}" *ngIf="element.dcFormat">
-              <button mat-icon-button matTooltip="Download">
+              <button mat-icon-button matTooltip="הורדה">
                 <mat-icon>cloud_download</mat-icon>
               </button>
             </a>
+            <button mat-icon-button matTooltip="הערות" (click)="openDialog(element)">
+              <mat-icon>assignment</mat-icon>
+            </button>
             <a routerLink="/edit/{{ element.id }}">
-              <button mat-icon-button matTooltip="Edit" *ngIf="usersService.hasPermission('manager')">
+              <button mat-icon-button matTooltip="מחיקה" *ngIf="usersService.hasPermission('manager')">
                 <mat-icon>edit</mat-icon>
               </button>
             </a>
-            <button mat-icon-button matTooltip="Delete" (click)="deleteDocument(element)"
+            <button mat-icon-button matTooltip="עריכה" (click)="deleteDocument(element)"
               *ngIf="usersService.hasPermission('manager')">
               <mat-icon>delete</mat-icon>
             </button>
@@ -211,7 +215,6 @@
         </button>
       </div>
     </div>
-
     <ng-template #nothingFound>
       <div>
         לא מצאתי כלום

@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>
+  {{ data.title }}
+</h1>
+<div mat-dialog-content>
+  <div fxLayout="row">
+    <mat-form-field class="editTextFields">
+      <mat-label>פרטי קשר</mat-label>
+      <input matInput [(ngModel)]="data.contact" matTooltip="שם, טלפון, או אימייל - כדי שנוכל לחזור אליך" />
+    </mat-form-field>
+  </div>
+</div>
+<div fxLayout="row">
+  <mat-form-field class="editTextFields">
+    <mat-label>הערות</mat-label>
+    <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10"
+      [(ngModel)]="data.remarks" matTooltip="הערות בקשר למסמך - מתי נוצר, מי בתמונה וכדומה"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>אישור</button>
+  <button mat-button (click)="onCancel()">ביטול</button>
+</div>

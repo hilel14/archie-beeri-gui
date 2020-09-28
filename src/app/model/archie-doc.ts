@@ -13,4 +13,5 @@ export interface ArchieDoc {
   importTime: string;
   sortCode?: number;
   content?: string;
+  remarks?: string;
 }

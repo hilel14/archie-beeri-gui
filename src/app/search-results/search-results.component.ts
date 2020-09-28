@@ -10,6 +10,7 @@ import { ArchieDocumentService } from "../archie-document.service";
 import { UsersService } from "../users.service";
 import { StorageService } from "../storage.service";
 import { ArchieDoc } from "../model/archie-doc";
+import { RemarksDialogComponent } from "../remarks-dialog/remarks-dialog.component";
 
 
 export interface SelectOption {
@@ -405,6 +406,20 @@ export class SearchResultsComponent implements OnInit {
   searchParamsChanged() {
     this.firstRow = 1;
     this.getSearchResults();
+  }
+
+  openDialog(doc: ArchieDoc): void {
+    const dialogRef = this.dialog.open(RemarksDialogComponent, {
+      height: '400px',
+      width: '600px',
+      data: { id: doc.id, title: doc.dcTitle }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.archieDocumentService.addRemarks(result)
+          .subscribe((data: any) => console.log("Adding remarks to " + result.id));
+      }
+    });
   }
 
 }
