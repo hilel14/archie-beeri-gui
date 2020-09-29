@@ -1,5 +1,28 @@
-<mat-card dir=ltr>
-  <p>
-    Archie Beeri version {{ getVersion() }}
-  </p>
+<mat-card>
+    <div dir="ltr">
+        <h1>
+            Archie Beeri
+        </h1>
+        <p>
+            Environment:
+            <strong>
+                {{ getEnvironment() }}
+            </strong>
+        </p>
+        <p>Version</p>
+        <ul>
+            <li>
+                GUI:
+                <strong>
+                    {{ getUiVersion() }}
+                </strong>
+            </li>
+            <li>
+                API:
+                <strong>
+                    {{ apiVersion }}
+                </strong>
+            </li>
+        </ul>
+    </div>
 </mat-card>
