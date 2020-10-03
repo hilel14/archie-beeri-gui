@@ -11,6 +11,7 @@ import { UsersService } from "../users.service";
 import { StorageService } from "../storage.service";
 import { ArchieDoc } from "../model/archie-doc";
 import { RemarksDialogComponent } from "../remarks-dialog/remarks-dialog.component";
+import { jsonpCallbackContext } from "@angular/common/http/src/module";
 
 
 export interface SelectOption {
@@ -30,6 +31,8 @@ export class SearchResultsComponent implements OnInit {
   defaultNumberOfRows = 5;
   numberOfRows: number = this.defaultNumberOfRows;
   searchBox: string;
+  searchTermPos: string = "any";
+  searchInFields: string = "all";
   searchQuery: string;
   dcCreators: SelectOption[];
   dcCreatorFilter: string;
@@ -44,6 +47,10 @@ export class SearchResultsComponent implements OnInit {
   dcTitleString: string;
   sortField: string = "dcDate";
   sortOrder: string = "asc";
+  //dcTitleHighlighting: string[];
+  //dcDescriptionHighlighting: string[];
+  //contentHighlighting: string[];
+  highlighting: {};
 
   constructor(
     private route: ActivatedRoute,
@@ -238,8 +245,26 @@ export class SearchResultsComponent implements OnInit {
   }
 
   buildSolrSearchQuery(): void {
-    // main search term
-    this.searchQuery = "q=" + this.searchBox;
+    // main search term    
+    switch (this.searchTermPos) {
+      case "fuzzy":
+        this.searchQuery = "q=" + this.searchBox + "~";
+        break;
+      case "exact":
+        this.searchQuery = "q=" + "\"" + this.searchBox + "\"";
+        break;
+      case "any":
+        this.searchQuery = "q=" + this.searchBox.split(" ").join(" AND ");
+        break;
+      case "start":
+        this.searchQuery = "q=*" + this.searchBox;
+        break;
+      case "end":
+        this.searchQuery = "q=" + this.searchBox + "*";
+        break;
+      default:
+        console.log("Unknown term pos: " + this.searchTermPos);
+    }
     // Add dcType filter to search query
     if (this.dcTypeFilter) {
       this.searchQuery += "&fq=dcType:" + this.dcTypeFilter;
@@ -317,6 +342,7 @@ export class SearchResultsComponent implements OnInit {
   processSearchResults(data: any) {
     this.dataSource = data["response"]["docs"];
     this.totalDocumentsFound = data["response"]["numFound"];
+    this.highlighting = data["highlighting"];
   }
 
   deleteDocument(doc: ArchieDoc): void {
@@ -378,6 +404,18 @@ export class SearchResultsComponent implements OnInit {
       console.log("unknown dcType: " + dcType);
       return "?";
     }
+  }
+
+  getHighlighting(id: string, fieldName: string) {
+    return this.highlighting[id][fieldName];
+  }
+
+  isHighlighted(id: string) {
+    console.log(this.highlighting[id]["dcTitle"]);
+    return
+    this.getHighlighting(id, "dcTitle")
+      || this.getHighlighting(id, "dcDescription")
+      || this.getHighlighting(id, "content");
   }
 
   nextPageDisabled(): boolean {

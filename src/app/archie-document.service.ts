@@ -90,10 +90,13 @@ export class ArchieDocumentService {
       "&q.op=AND&" +
       searchParams +
       "&fl=" + fieldList +
-      "&start=" +
-      (start - 1) +
-      "&rows=" +
-      rows;
+      "&start=" + (start - 1) +
+      "&rows=" + rows +
+      "&hl=on" +
+      "&hl.fl=dcTitle,dcDescription,content" +
+      "&hl.simple.pre=<strong>" +
+      "&hl.simple.post=</strong>";
+
     console.log(url);
     return this.http
       .get<any>(url)
