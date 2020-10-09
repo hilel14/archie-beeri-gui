@@ -9,7 +9,7 @@ export const environment = {
       private: "http://localhost/assetstore/private"
    },
    locationOrigin: "http://localhost",
-   version: "2.3-SNAPSHOT"
+   version: "2.4-SNAPSHOT"
 };
 
 /*
