@@ -222,11 +222,11 @@
               <mat-icon>assignment</mat-icon>
             </button>
             <a routerLink="/edit/{{ element.id }}">
-              <button mat-icon-button matTooltip="מחיקה" *ngIf="usersService.hasPermission('manager')">
+              <button mat-icon-button matTooltip="עריכה" *ngIf="usersService.hasPermission('manager')">
                 <mat-icon>edit</mat-icon>
               </button>
             </a>
-            <button mat-icon-button matTooltip="עריכה" (click)="deleteDocument(element)"
+            <button mat-icon-button matTooltip="מחיקה" (click)="deleteDocument(element)"
               *ngIf="usersService.hasPermission('manager')">
               <mat-icon>delete</mat-icon>
             </button>
