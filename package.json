@@ -26,7 +26,6 @@
     "codelyzer": "^5.1.2",
     "core-js": "^2.6.11",
     "file-saver": "^2.0.2",
-    "hammerjs": "^2.0.8",
     "jwt-decode": "^2.2.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
