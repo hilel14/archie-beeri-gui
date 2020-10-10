@@ -11,7 +11,7 @@ import { UsersService } from "../users.service";
 import { StorageService } from "../storage.service";
 import { ArchieDoc } from "../model/archie-doc";
 import { RemarksDialogComponent } from "../remarks-dialog/remarks-dialog.component";
-import { jsonpCallbackContext } from "@angular/common/http/src/module";
+//import { jsonpCallbackContext } from "@angular/common/http/src/module";
 
 
 export interface SelectOption {
