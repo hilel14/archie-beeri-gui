@@ -2,14 +2,21 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { version } from '../../package.json';
+import { dependencies } from '../../package.json';
+
 export const environment = {
    production: false,
+   locationOrigin: "http://localhost",
    assetStore: {
       public: "http://localhost/assetstore/public",
       private: "http://localhost/assetstore/private"
    },
-   locationOrigin: "http://localhost",
-   version: "2.4-SNAPSHOT"
+   componentsVersion: {
+      archie: version,
+      angular: dependencies["@angular/core"],
+      material: dependencies["@angular/material"]
+   }
 };
 
 /*
@@ -25,14 +32,14 @@ export const environment = {
 Release workflow:
 
 1. Commit changes
-2. Change version field in environment.ts and environment.prod.ts to the next version
+2. Change version field in package.json to the next version
    and remove the SNAPSHOT suffix.
    Example: 1.0.0
 3. Commit changes. Message: prepare release archie-beeri-gui-x.y.z
    Example: prepare release archie-beeri-gui-1.0.0
 4. Create tag archie-beeri-gui-x.y.z
    Example: archie-beeri-gui-1.0.0
-5. Change version field in environment.ts and environment.prod.ts to x.y.z-SNAPSHOT
+5. Change version field to x.y.z-SNAPSHOT
    where x.y.z is the next bugfix version.
    Example: 1.0.1-SNAPSHOT
 6. Commit changes. Message: prepare for next development iteration.

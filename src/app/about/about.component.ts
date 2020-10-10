@@ -23,7 +23,15 @@ export class AboutComponent implements OnInit {
   }
 
   getUiVersion() {
-    return environment.version;
+    return environment.componentsVersion.archie;
+  }
+
+  getAngularVersion() {
+    return environment.componentsVersion.angular;
+  }
+
+  getMaterialVersion() {
+    return environment.componentsVersion.material;
   }
 
   getApiVersion() {
