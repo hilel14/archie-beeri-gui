@@ -4,13 +4,11 @@
       <div fxLayout="column" fxLayoutGap="1em" style="width: 20%;">
         <mat-form-field>
           <mat-select [(ngModel)]="searchTermPos" (selectionChange)="searchParamsChanged()">
-            <mat-option value="exact">חפשו מסמכים עם הבטוי המדוייק </mat-option>
-            <mat-option value="any">חפשו מסמכים שמכילים את המילים</mat-option>
-            <mat-option value="fuzzy">חפשו מסמכים עם בטויים דומים ל</mat-option>
-            <!--
-            <mat-option value="start">חפשו בטויים שמתחילים במילה</mat-option>
-            <mat-option value="end">חפש בטויים שנגמרים במילה </mat-option>
-            -->
+            <mat-option value="exact">חפשו את הביטוי המדוייק:</mat-option>
+            <mat-option value="any">חפשו את המילים השלמות:</mat-option>
+            <mat-option value="start">חפשו מלה בודדת שמתחילה באותיות:</mat-option>
+            <mat-option value="end">חפשו מלה בודדת שנגמרת באותיות:</mat-option>
+            <mat-option value="fuzzy" matTooltip="דוגמא: מחפשים מרפאה ומוצאים במרפאה">חפשו מלה שמזכירה:</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -26,8 +24,9 @@
             <mat-option value="all">בכל השדות</mat-option>
             <mat-option value="dcTitle">בכותרת</mat-option>
             <mat-option value="dcDescription">בתיאור</mat-option>
-            <mat-option value="content">בתוכן</mat-option>
-            <mat-option value="storageLocation" *ngIf="hasPermission('manager')">במיקום</mat-option>
+            <mat-option value="storageLocation" *ngIf="hasPermission('manager')"
+              matTooltip="עובד רק עם: מילה שמתחילה באותיות, מילה שנגמרת באותיות או הביטוי המדויק">
+              במיקום</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

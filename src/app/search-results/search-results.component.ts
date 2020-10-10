@@ -47,9 +47,6 @@ export class SearchResultsComponent implements OnInit {
   dcTitleString: string;
   sortField: string = "dcDate";
   sortOrder: string = "asc";
-  //dcTitleHighlighting: string[];
-  //dcDescriptionHighlighting: string[];
-  //contentHighlighting: string[];
   highlighting: {};
 
   constructor(
@@ -162,11 +159,21 @@ export class SearchResultsComponent implements OnInit {
     this.route.queryParamMap.subscribe((params: { [key: string]: any }) => {
       //console.log("updateModelFromUrl " + JSON.stringify(params));
       // search term
-      let q: string[] = params.get("q").split(":");
-      console.log(q[0]);
-      this.searchBox = params.get("q");
-      if (!this.searchBox) {
+      if (params.get("q")) {
+        let q: string[] = params.get("q").split(":");
+        if (q.length > 1) {
+          this.searchInFields = q[0];
+          this.searchBox = q[1];
+        } else {
+          this.searchInFields = "all";
+          this.searchBox = q[0];
+        }
+      } else {
         this.searchBox = "*";
+      }
+      // searchTermPos
+      if (params.get("searchTermPos")) {
+        this.searchTermPos = params.get("searchTermPos");
       }
       // filters
       let fq: Array<string> = params.getAll("fq");
@@ -212,7 +219,15 @@ export class SearchResultsComponent implements OnInit {
   updateUrlFromModel(): void {
     let queryParams: Params = {};
     // search term
-    queryParams['q'] = this.searchBox;
+    if (this.searchInFields === "all") {
+      queryParams['q'] = this.searchBox;
+    } else {
+      queryParams['q'] = this.searchInFields + ":" + this.searchBox;
+    }
+    // search term pos
+    if (this.searchTermPos) {
+      queryParams['searchTermPos'] = this.searchTermPos;
+    }
     // filter query params
     let fq: Array<string> = [];
     if (this.dcTypeFilter) {
@@ -249,7 +264,7 @@ export class SearchResultsComponent implements OnInit {
   buildSolrSearchQuery(): void {
     // main search term
     let q = "";
-    let userInput = this.searchBox.split(":").join(" ");
+    let userInput = this.searchBox.trim().split(":").join(" ");
     switch (this.searchTermPos) {
       case "fuzzy":
         q = userInput + "~";
@@ -261,10 +276,10 @@ export class SearchResultsComponent implements OnInit {
         q = userInput.split(" ").join(" AND ");
         break;
       case "start":
-        q = "*" + userInput;
+        q = userInput + "*";
         break;
       case "end":
-        q = userInput + "*";
+        q = "*" + userInput;
         break;
       default:
         console.log("Unknown term pos: " + this.searchTermPos);
@@ -410,16 +425,6 @@ export class SearchResultsComponent implements OnInit {
   getHighlighting(id: string, fieldName: string) {
     return this.highlighting[id][fieldName];
   }
-
-  /*
-  isHighlighted(id: string) {
-    console.log(this.highlighting[id]["dcTitle"]);
-    return
-    this.getHighlighting(id, "dcTitle")
-      || this.getHighlighting(id, "dcDescription")
-      || this.getHighlighting(id, "content");
-  }
-*/
 
   nextPageDisabled(): boolean {
     return Number(this.firstRow) + Number(this.numberOfRows) > Number(this.totalDocumentsFound);
