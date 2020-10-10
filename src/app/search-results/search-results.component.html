@@ -22,12 +22,12 @@
       </div>
       <div fxLayout="column" fxLayoutGap="1em" style="width: 20%;">
         <mat-form-field>
-          <mat-select [(ngModel)]="searchInFields">
+          <mat-select [(ngModel)]="searchInFields" (selectionChange)="searchParamsChanged()">
             <mat-option value="all">בכל השדות</mat-option>
             <mat-option value="dcTitle">בכותרת</mat-option>
             <mat-option value="dcDescription">בתיאור</mat-option>
             <mat-option value="content">בתוכן</mat-option>
-            <mat-option value="dcSource">במקור</mat-option>
+            <mat-option value="storageLocation" *ngIf="usersService.hasPermission('manager')">במיקום</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -261,6 +261,10 @@
           <div *ngIf="getHighlighting(element.id,'content')">
             <div class="highlightTitle">מילות החיפוש בתוכן: </div>
             <div [innerHTML]="getHighlighting(element.id,'content')"></div>
+          </div>
+          <div *ngIf="getHighlighting(element.id,'storageLocation')">
+            <div class="highlightTitle">מילות החיפוש בשדה המיקום: </div>
+            <div [innerHTML]="getHighlighting(element.id,'storageLocation')"></div>
           </div>
         </div>
       </div>

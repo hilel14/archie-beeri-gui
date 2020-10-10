@@ -162,6 +162,8 @@ export class SearchResultsComponent implements OnInit {
     this.route.queryParamMap.subscribe((params: { [key: string]: any }) => {
       //console.log("updateModelFromUrl " + JSON.stringify(params));
       // search term
+      let q: string[] = params.get("q").split(":");
+      console.log(q[0]);
       this.searchBox = params.get("q");
       if (!this.searchBox) {
         this.searchBox = "*";
@@ -245,26 +247,29 @@ export class SearchResultsComponent implements OnInit {
   }
 
   buildSolrSearchQuery(): void {
-    // main search term    
+    // main search term
+    let q = "";
+    let userInput = this.searchBox.split(":").join(" ");
     switch (this.searchTermPos) {
       case "fuzzy":
-        this.searchQuery = "q=" + this.searchBox + "~";
+        q = userInput + "~";
         break;
       case "exact":
-        this.searchQuery = "q=" + "\"" + this.searchBox + "\"";
+        q = "\"" + userInput + "\"";
         break;
       case "any":
-        this.searchQuery = "q=" + this.searchBox.split(" ").join(" AND ");
+        q = userInput.split(" ").join(" AND ");
         break;
       case "start":
-        this.searchQuery = "q=*" + this.searchBox;
+        q = "*" + userInput;
         break;
       case "end":
-        this.searchQuery = "q=" + this.searchBox + "*";
+        q = userInput + "*";
         break;
       default:
         console.log("Unknown term pos: " + this.searchTermPos);
     }
+    this.searchQuery = this.searchInFields === "all" ? "q=" + q : "q=" + this.searchInFields + ":" + q;
     // Add dcType filter to search query
     if (this.dcTypeFilter) {
       this.searchQuery += "&fq=dcType:" + this.dcTypeFilter;
@@ -274,10 +279,6 @@ export class SearchResultsComponent implements OnInit {
     // Add dcCreator filter
     if (this.dcCreatorFilter) {
       this.searchQuery += "&fq=dcCreator:" + '"' + this.dcCreatorFilter + '"';
-    }
-    // dcTitle
-    if (this.dcTitleString) {
-      this.searchQuery += "&fq=dcTitleString:" + '"' + this.dcTitleString + '"';
     }
     // collection
     if (this.dcCollectionFilter) {
