@@ -411,6 +411,7 @@ export class SearchResultsComponent implements OnInit {
     return this.highlighting[id][fieldName];
   }
 
+  /*
   isHighlighted(id: string) {
     console.log(this.highlighting[id]["dcTitle"]);
     return
@@ -418,6 +419,7 @@ export class SearchResultsComponent implements OnInit {
       || this.getHighlighting(id, "dcDescription")
       || this.getHighlighting(id, "content");
   }
+*/
 
   nextPageDisabled(): boolean {
     return Number(this.firstRow) + Number(this.numberOfRows) > Number(this.totalDocumentsFound);
