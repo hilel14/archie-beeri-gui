@@ -447,6 +447,10 @@ export class SearchResultsComponent implements OnInit {
     this.getSearchResults();
   }
 
+  hasPermission(role: string) {
+    return this.usersService.hasPermission(role);
+  }
+
   openDialog(doc: ArchieDoc): void {
     const dialogRef = this.dialog.open(RemarksDialogComponent, {
       height: '400px',

@@ -27,7 +27,7 @@
             <mat-option value="dcTitle">בכותרת</mat-option>
             <mat-option value="dcDescription">בתיאור</mat-option>
             <mat-option value="content">בתוכן</mat-option>
-            <mat-option value="storageLocation" *ngIf="usersService.hasPermission('manager')">במיקום</mat-option>
+            <mat-option value="storageLocation" *ngIf="hasPermission('manager')">במיקום</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -222,12 +222,12 @@
               <mat-icon>assignment</mat-icon>
             </button>
             <a routerLink="/edit/{{ element.id }}">
-              <button mat-icon-button matTooltip="עריכה" *ngIf="usersService.hasPermission('manager')">
+              <button mat-icon-button matTooltip="עריכה" *ngIf="hasPermission('manager')">
                 <mat-icon>edit</mat-icon>
               </button>
             </a>
             <button mat-icon-button matTooltip="מחיקה" (click)="deleteDocument(element)"
-              *ngIf="usersService.hasPermission('manager')">
+              *ngIf="hasPermission('manager')">
               <mat-icon>delete</mat-icon>
             </button>
           </div>

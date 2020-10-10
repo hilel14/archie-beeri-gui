@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "archie-beeri-ui"
+  "defaultProject": "archie-beeri-ui",
+  "cli": {
+    "analytics": "d7af7381-a3ba-40ff-96b2-e0a596d76c55"
+  }
 }
