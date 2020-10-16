@@ -115,7 +115,7 @@ export class ImportFolderComponent implements OnInit {
   }
 
   postImport(data: any): void {
-    console.log("postImportFolder: " + data);
+    console.debug("postImportFolder: " + data);
     alert("הקבצים נשלחו לשרת לקליטה - לחצו אישור לצפייה בדוח");
     this.router.navigate(["/import-folder-report"]);
   }

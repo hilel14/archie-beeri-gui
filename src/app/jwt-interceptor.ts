@@ -15,18 +15,15 @@ export class JwtInterceptor implements HttpInterceptor {
     // add authorization header with jwt token if available
     let user = JSON.parse(localStorage.getItem("archieUser"));
     if (user && user.token) {
-      //console.log(user.token);
       request = request.clone({
         setHeaders: {
-          //Authorization: `Bearer ${user.token}`
-          //Authorization: `Basic ${user.token}`
           Authorization: user.token
         }
       });
     }
     return next.handle(request).pipe(
       catchError(error => {
-        console.log("error status = " + error.status);
+        console.log("jwt interceptor error: " + error );
         if (error.status === 500) {
           this.router.navigate(['login']);
         }

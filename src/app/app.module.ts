@@ -9,6 +9,9 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { JwtModule } from '@auth0/angular-jwt';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DcCollectionComponent } from './dc-collection/dc-collection.component';
@@ -50,7 +53,8 @@ registerLocaleData(localeHe, "he", localeHeExtra);
     HttpClientModule,
     LayoutModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+    SocialLoginModule
     //JwtModule.forRoot({})
     //JwtModule
   ],
@@ -59,7 +63,21 @@ registerLocaleData(localeHe, "he", localeHeExtra);
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "he" },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '573921547371-qt1ncdtd7u17ru358hkkko4agucih7cd'
+            ),
+          }
+        ],
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

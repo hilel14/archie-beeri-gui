@@ -150,14 +150,12 @@ export class SearchResultsComponent implements OnInit {
   }
 
   exportSearchResults(data: any) {
-    //console.log(data);
     const blob = new Blob([data], { type: 'text/plain' });
     saveAs(blob, "archie-search-results.csv");
   }
 
   updateModelFromUrl() {
     this.route.queryParamMap.subscribe((params: { [key: string]: any }) => {
-      //console.log("updateModelFromUrl " + JSON.stringify(params));
       // search term
       if (params.get("q")) {
         let q: string[] = params.get("q").split(":");
@@ -454,8 +452,8 @@ export class SearchResultsComponent implements OnInit {
     this.getSearchResults();
   }
 
-  hasPermission(role: string) {
-    return this.usersService.hasPermission(role);
+  hasPermission(roles: string[]): boolean {
+    return this.usersService.hasPermission(roles);
   }
 
   openDialog(doc: ArchieDoc): void {
@@ -467,7 +465,7 @@ export class SearchResultsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.archieDocumentService.addRemarks(result)
-          .subscribe((data: any) => console.log("Adding remarks to " + result.id));
+          .subscribe((data: any) => console.debug("Adding remarks to " + result.id));
       }
     });
   }

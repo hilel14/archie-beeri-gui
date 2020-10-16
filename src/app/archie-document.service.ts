@@ -97,7 +97,7 @@ export class ArchieDocumentService {
       "&hl.simple.pre=<strong>" +
       "&hl.simple.post=</strong>";
 
-    console.log(url);
+    console.debug(url);
     return this.http
       .get<any>(url)
       .pipe(catchError(this.handleError("getSearchResults", [])));
@@ -118,8 +118,6 @@ export class ArchieDocumentService {
 
   updateDocument(id: string, record: any): Observable<any> {
     let url = this.apiUrl + "/docs/update/" + id;
-    //console.log(url);
-    //console.log("updating doc " + JSON.stringify(docs));
     return this.http
       .put(url, record, httpOptions)
       .pipe(catchError(this.handleError("updateDocument", [])));

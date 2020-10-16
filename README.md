@@ -48,5 +48,6 @@ https://angular.io/guide/i18n
 * https://netbeans.org/bugzilla/show_bug.cgi?id=257587
 
 ## Development
-* ng serve --base-href /archie/beeri/dev/
+* ng serve --disableHostCheck
 * ng generate component edit-document --module app
+* ng build --prod --allowed-common-js-dependencies=url --allowed-common-js-dependencies=file-saver

@@ -1,11 +1,15 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Observable, of } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { SocialAuthService, SocialUser } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
+
 import { Credentials } from "./model/credentials";
 import { User } from "./model/user";
 import { environment } from "src/environments/environment";
+import { ArchieDocumentService } from './archie-document.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -17,7 +21,7 @@ const httpOptions = {
 export class UsersService {
   private baseUrl: string;
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private http: HttpClient, private authService: SocialAuthService) {
     this.baseUrl = environment.locationOrigin + "/api/rest/users/";
   }
 
@@ -36,6 +40,20 @@ export class UsersService {
       .pipe(catchError(this.handleError("authenticate", [])));
   }
 
+  googleLogin(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((socialUser: SocialUser) => {
+      this.googleAuthenticate(socialUser).subscribe((data: any) =>
+        this.storeUserDetails(data)
+      );
+    });
+  }
+
+  googleAuthenticate(socialUser: SocialUser): Observable<any> {
+    let url = this.baseUrl + "authenticate-with-google";
+    return this.http.post(url, socialUser, httpOptions)
+      .pipe(catchError(this.handleError("googleAuthenticate", [])));
+  }
+
   storeUserDetails(user: User) {
     if (user) {
       localStorage.setItem("archieUser", JSON.stringify(user));
@@ -43,10 +61,10 @@ export class UsersService {
     }
   }
 
-  hasPermission(role: string): boolean {
+  hasPermission(roles: string[]): boolean {
     if (localStorage.getItem("archieUser")) {
       let user = JSON.parse(localStorage.getItem("archieUser"));
-      return user.role == role;
+      return roles.includes(user.role);
     }
     return false;
   }

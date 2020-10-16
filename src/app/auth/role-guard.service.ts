@@ -17,8 +17,9 @@ export class RoleGuardService implements CanActivate {
     const item = localStorage.getItem('archieUser');
     if (item) {
       const user: User = JSON.parse(item);
-      console.log("expirationDate = " + jwtHelper.getTokenExpirationDate(user.token));
-      if (!jwtHelper.isTokenExpired(user.token)) {
+      if (jwtHelper.isTokenExpired(user.token)) {
+        console.log("Token expired at " + jwtHelper.getTokenExpirationDate(user.token));
+      } else {
         if (jwtHelper.decodeToken(user.token).sub === expectedRole) {
           return true;
         }

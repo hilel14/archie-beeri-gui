@@ -24,7 +24,7 @@
             <mat-option value="all">בכל השדות</mat-option>
             <mat-option value="dcTitle">בכותרת</mat-option>
             <mat-option value="dcDescription">בתיאור</mat-option>
-            <mat-option value="storageLocation" *ngIf="hasPermission('manager')"
+            <mat-option value="storageLocation" *ngIf="hasPermission(['manager'])"
               matTooltip="עובד רק עם: מילה שמתחילה באותיות, מילה שנגמרת באותיות או הביטוי המדויק">
               במיקום</mat-option>
           </mat-select>
@@ -221,12 +221,12 @@
               <mat-icon>assignment</mat-icon>
             </button>
             <a routerLink="/edit/{{ element.id }}">
-              <button mat-icon-button matTooltip="עריכה" *ngIf="hasPermission('manager')">
+              <button mat-icon-button matTooltip="עריכה" *ngIf="hasPermission(['manager','editor'])">
                 <mat-icon>edit</mat-icon>
               </button>
             </a>
             <button mat-icon-button matTooltip="מחיקה" (click)="deleteDocument(element)"
-              *ngIf="hasPermission('manager')">
+              *ngIf="hasPermission(['manager'])">
               <mat-icon>delete</mat-icon>
             </button>
           </div>

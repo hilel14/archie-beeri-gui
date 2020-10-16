@@ -87,8 +87,4 @@ export class ImportFileReportComponent implements OnInit {
     this.location.back();
   }
 
-  myTest() {
-    console.log(JSON.stringify(this.importFolder));
-  }
-
 }

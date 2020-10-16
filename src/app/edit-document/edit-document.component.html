@@ -1,7 +1,7 @@
 <mat-card>
   <div *ngIf="doc">
     <div fxLayout="row" *ngIf="doc.dcFormat">
-      <img src="{{ getThumbnailLink(doc) }}" alt="image not found" />
+      <img src="{{ getThumbnailLink(doc) }}" alt="image not found" style="width: 800px;"/>
     </div>
     <div fxLayout="row" *ngIf="doc.dcFormat">
       <p class="preview">
@@ -9,13 +9,13 @@
         {{ doc.dcFormat }}
       </p>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="hasPermission(['manager','editor'])">
       <mat-form-field class="editTextFields">
         <mat-label>כותרת</mat-label>
         <input matInput [(ngModel)]="doc.dcTitle" />
       </mat-form-field>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="hasPermission(['manager'])" >
       <div fxLayout="column" fxLayoutAlign="center center" style="margin-left: 1em;">
         יוצרים
       </div>
@@ -28,11 +28,12 @@
       <div fxLayout="column" fxLayoutAlign="center center" style="margin-right: 1em;">
         <mat-form-field>
           <mat-label>הוסף יוצר</mat-label>
-          <input matInput [(ngModel)]="newCreator" (keyup.enter)="addCreator();" matTooltip="הקלידו את שם היוצר והקישו אנטר" />
+          <input matInput [(ngModel)]="newCreator" (keyup.enter)="addCreator();"
+            matTooltip="הקלידו את שם היוצר והקישו אנטר" />
         </mat-form-field>
       </div>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="hasPermission(['manager'])" >
       <mat-form-field>
         <mat-label>תאריך</mat-label>
         <input matInput [matDatepicker]="picker" [(ngModel)]="doc.dcDate" />
@@ -40,7 +41,7 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="hasPermission(['manager'])" >
       <mat-form-field>
         <mat-label>סוג</mat-label>
         <mat-select [(value)]="doc.dcType" matTooltip="סוג המסמך או הפריט">
@@ -52,7 +53,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="hasPermission(['manager'])" >
       <mat-form-field>
         <mat-label>סיווג</mat-label>
         <mat-select [(value)]="doc.dcAccessRights"
@@ -63,20 +64,20 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="hasPermission(['manager','editor'])">
       <mat-form-field class="editTextFields">
         <mat-label>תיאור</mat-label>
         <textarea matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="10"
           [(ngModel)]="doc.dcDescription"></textarea>
       </mat-form-field>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="hasPermission(['manager'])" >
       <mat-form-field class="editTextFields">
         <mat-label>מיקום</mat-label>
         <input matInput [(ngModel)]="doc.storageLocation" />
       </mat-form-field>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="hasPermission(['manager'])" >
       <div fxLayout="column" fxLayoutAlign="center center" style="margin-left: 1em;">
         נושאים
       </div>
@@ -93,7 +94,7 @@
         </mat-form-field>
       </div>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="hasPermission(['manager'])" >
       <mat-form-field>
         <mat-label>אוסף</mat-label>
         <mat-select placeholder="באוסף" [(ngModel)]="doc.dcIsPartOf">
@@ -103,22 +104,24 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="hasPermission(['manager'])" >
       <mat-form-field class="editTextFields">
         <mat-label>תוכן</mat-label>
         <textarea matInput [(ngModel)]="doc.content" rows=10></textarea>
       </mat-form-field>
     </div>
     <div fxLayout="row">
-      <button mat-icon-button matTooltip="Save" (click)="saveDocument()">
+      <button mat-icon-button matTooltip="Save" (click)="saveDocument()" *ngIf="hasPermission(['manager','editor'])" >
         <mat-icon>save</mat-icon>
       </button>
       <button mat-icon-button matTooltip="Cancel" (click)="goBack()">
         <mat-icon>cancel</mat-icon>
       </button>
+      <!--
       <button mat-icon-button matTooltip="Back" (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
       </button>
+      -->
     </div>
   </div>
 </mat-card>

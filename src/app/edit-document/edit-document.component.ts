@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { ArchieDocumentService } from "../archie-document.service";
+import { UsersService } from "../users.service";
 import { StorageService } from "../storage.service";
 import { ArchieDoc } from "../model/archie-doc";
 
@@ -23,12 +24,17 @@ export class EditDocumentComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private archieDocumentService: ArchieDocumentService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private usersService: UsersService
   ) { }
 
   ngOnInit() {
     this.getAllCollections();
     this.getDocDetails();
+  }
+
+  hasPermission(roles: string[]): boolean {
+    return this.usersService.hasPermission(roles);
   }
 
   getAllCollections(): void {
@@ -139,10 +145,8 @@ export class EditDocumentComponent implements OnInit {
       record["dcFormat"] = this.doc.dcFormat;
     }
     // submit update
-    console.log(record);
     this.archieDocumentService
       .updateDocument(this.doc.id, record)
-      //.subscribe((data: any) => console.log(data));
       .subscribe(() => this.goBack());
   }
 }
