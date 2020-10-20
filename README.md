@@ -51,3 +51,18 @@ https://angular.io/guide/i18n
 * ng serve --disableHostCheck
 * ng generate component edit-document --module app
 * ng build --prod --allowed-common-js-dependencies=url --allowed-common-js-dependencies=file-saver
+
+## New release
+
+* Update version field in pakcage.json to x.y.z
+* npm install
+* Optionally: upgrade pakcages
+* Commit changes. Remark: prepare release archie-beeri-gui-2.4
+* Tag: archie-beeri-gui-x.y.z
+* Update version field in pakcage.json to x.y.z-SNAPSHOT
+* npm install
+* Commit changes. Remark: prepare for next development iteration
+* ng build --prod
+* rm -rf /var/www/archie/beeri/*
+* mv dist/archie-beeri-ui/* /var/www/archie/beeri
+

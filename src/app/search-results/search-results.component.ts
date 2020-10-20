@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { Router, ActivatedRoute, Params, ParamMap } from "@angular/router";
 import { Location } from "@angular/common";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { saveAs } from 'file-saver';
 import { stringify } from "@angular/compiler/src/util";
 import { isNgTemplate } from "@angular/compiler";
