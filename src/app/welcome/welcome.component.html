@@ -3,16 +3,16 @@
     <h1>ברוכים הבאים לארכיון קיבוץ בארי</h1>
     <div>
       <strong>הארכיון מכיל: </strong>
-      <span>{{ getDcTypeCount("text") }} </span>
+      <span>{{ getDcTypeCount("text") | number }} </span>
       <span>מסמכי טקסט</span>
       <span> | </span>
-      <span> {{ getDcTypeCount("image") }} </span>
+      <span> {{ getDcTypeCount("image") | number }} </span>
       <span>תמונות</span>
       <span> | </span>
-      <span> {{ getDcTypeCount("audio") }} </span>
+      <span> {{ getDcTypeCount("audio") | number }} </span>
       <span>קבצי אודיו</span>
       <span> | </span>
-      <span> {{ getDcTypeCount("video") }} </span>
+      <span> {{ getDcTypeCount("video") | number }} </span>
       <span>סרטוני וידאו</span>
     </div>
 
