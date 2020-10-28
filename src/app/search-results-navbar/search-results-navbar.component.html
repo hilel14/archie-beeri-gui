@@ -1,0 +1,50 @@
+<div class="sorter-row">
+    <mat-form-field>
+        <mat-label>פריט מספר</mat-label>
+        <input matInput matTooltip="הקלידו מספר פריט ולחצו על Enter" [(ngModel)]="searchParams.firstRow"
+            (keyup.enter)="jumpToPage()" />
+    </mat-form-field>
+    <!-- Paginator -->
+    <mat-form-field>
+        <mat-select placeholder="פריטים בעמוד" [(ngModel)]="searchParams.numberOfRows"
+            (selectionChange)="navParamsChanged()"> 
+            <mat-option value="1">
+                1
+            </mat-option>
+            <mat-option value="5">
+                5
+            </mat-option>
+            <mat-option value="10">
+                10
+            </mat-option>
+            <mat-option value="25">
+                25
+            </mat-option>
+            <mat-option value="100">
+                100
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-button [disabled]="previousPageDisabled()" matTooltip="דפדף אל קבוצת הפריטים הקודמת"
+        (click)="previousPage()">
+        אחורה
+    </button>
+    <button mat-button [disabled]="nextPageDisabled()" matTooltip="דפדף אל קבוצת הפריטים הבאה" (click)="nextPage()">
+        קדימה
+    </button>
+    <!-- sort field -->
+    <mat-form-field>
+        <mat-select placeholder="מיין לפי" [(ngModel)]="searchParams.sortField" (selectionChange)="navParamsChanged()">
+            <mat-option value="dcDate">תאריך</mat-option>
+            <mat-option value="dcTitle">כותרת</mat-option>
+            <mat-option value="importTime">קליטה</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!-- sort order -->
+    <mat-form-field>
+        <mat-select placeholder="בסדר" [(ngModel)]="searchParams.sortOrder" (selectionChange)="navParamsChanged()">
+            <mat-option value="asc">עולה</mat-option>
+            <mat-option value="desc">יורד</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

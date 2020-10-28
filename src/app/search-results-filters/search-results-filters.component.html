@@ -1,0 +1,80 @@
+<div fxLayout="row" fxLayoutGap="1em">
+    <div fxLayout="column" fxLayoutGap="1em" style="width: 20%;">
+        <mat-form-field>
+            <mat-select [(ngModel)]="searchParams.searchTermModifier" (selectionChange)="searchParamsChanged()">
+                <mat-option value="exact">חפשו את הביטוי המדוייק:</mat-option>
+                <mat-option value="any">חפשו את המילים השלמות:</mat-option>
+                <mat-option value="start">חפשו מלה בודדת שמתחילה באותיות:</mat-option>
+                <mat-option value="end">חפשו מלה בודדת שנגמרת באותיות:</mat-option>
+                <mat-option value="fuzzy" matTooltip="דוגמא: מחפשים מרפאה ומוצאים במרפאה">חפשו מלה שמזכירה:</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div fxLayout="column" fxLayoutGap="1em" style="width: 60%;">
+        <mat-form-field appearance="legacy">
+            <input matInput [(ngModel)]="searchParams.searchTerm" (keyup.enter)="searchParamsChanged()" />
+            <mat-icon matSuffix ngOnc>search</mat-icon>
+        </mat-form-field>
+    </div>
+    <div fxLayout="column" fxLayoutGap="1em" style="width: 20%;">
+        <mat-form-field>
+            <mat-select placeholder="בשדה" [(ngModel)]="searchParams.searchInFields"
+                (selectionChange)="searchParamsChanged()">
+                <mat-option *ngFor="let searchInField of searchInFields" [value]="searchInField.value">
+                    {{ searchInField.viewValue }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+
+<div fxLayout="row" fxLayoutGap="1em">
+    <div fxLayout="column" style="width: 10%;">
+        <mat-form-field>
+            <mat-select placeholder="במסמכים מסוג" [(ngModel)]="searchParams.dcTypeFilter"
+                (selectionChange)="searchParamsChanged()">
+                <mat-option *ngFor="let dcType of dcTypes" [value]="dcType.value">
+                    {{ dcType.viewValue }}
+                </mat-option>                
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div fxLayout="column" style="width: 35%;">
+        <mat-form-field>
+            <mat-select placeholder="מאת" [(ngModel)]="searchParams.dcCreatorFilter"
+                (selectionChange)="searchParamsChanged()">
+                <mat-option *ngFor="let dcCreator of dcCreators" [value]="dcCreator.value">
+                    {{ dcCreator.viewValue }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div fxLayout="column" style="width: 10%;">
+        <mat-form-field>
+            <input matInput [matDatepicker]="startDatePicker" placeholder="מתאריך"
+                [(ngModel)]="searchParams.startDateFilter" (dateChange)="searchParamsChanged()"
+                (click)="resetStartDatePicker($event)" readonly />
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div fxLayout="column" style="width: 10%;">
+        <mat-form-field>
+            <input matInput [matDatepicker]="endDatePicker" placeholder="עד תאריך"
+                [(ngModel)]="searchParams.endDateFilter" (dateChange)="searchParamsChanged()"
+                (click)="resetEndDatePicker($event)" readonly />
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div fxLayout="column" style="width: 35%;">
+        <mat-form-field>
+            <mat-select placeholder="באוסף" [(ngModel)]="searchParams.dcCollectionFilter"
+                (selectionChange)="searchParamsChanged()">
+                <mat-option *ngFor="let dcCollection of dcCollections" [value]="dcCollection.value">
+                    {{ dcCollection.viewValue }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>

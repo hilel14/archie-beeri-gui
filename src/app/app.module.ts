@@ -27,6 +27,8 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { AboutComponent } from './about/about.component';
 import { RemarksDialogComponent } from './remarks-dialog/remarks-dialog.component';
+import { SearchResultsFiltersComponent } from './search-results-filters/search-results-filters.component';
+import { SearchResultsNavbarComponent } from './search-results-navbar/search-results-navbar.component';
 
 registerLocaleData(localeHe, "he", localeHeExtra);
 
@@ -43,7 +45,9 @@ registerLocaleData(localeHe, "he", localeHeExtra);
     LoginComponent,
     DcCollectionComponent,
     AboutComponent,
-    RemarksDialogComponent
+    RemarksDialogComponent,
+    SearchResultsFiltersComponent,
+    SearchResultsNavbarComponent
   ],
   imports: [
     BrowserModule,
