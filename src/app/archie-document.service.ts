@@ -117,6 +117,7 @@ export class ArchieDocumentService {
   }
 
   updateDocument(id: string, record: any): Observable<any> {
+    console.debug("update record: " + JSON.stringify(record));
     let url = this.apiUrl + "/docs/update/" + id;
     return this.http
       .put(url, record, httpOptions)

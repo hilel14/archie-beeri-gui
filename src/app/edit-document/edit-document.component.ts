@@ -144,9 +144,14 @@ export class EditDocumentComponent implements OnInit {
     if (record["dcAccessRights"]) {
       record["dcFormat"] = this.doc.dcFormat;
     }
-    // submit update
-    this.archieDocumentService
-      .updateDocument(this.doc.id, record)
-      .subscribe(() => this.goBack());
+    // submit update if user actually changed something
+    if (Object.keys(record).length > 0) {
+      this.archieDocumentService
+        .updateDocument(this.doc.id, record)
+        .subscribe(() => this.goBack());
+    } else {
+      console.debug("document not changed");
+      this.goBack();
+    }
   }
 }
