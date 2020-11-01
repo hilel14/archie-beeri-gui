@@ -28,10 +28,11 @@ export class SearchResultsFiltersComponent implements OnInit {
   }
 
   initSearchInFields() {
-    this.searchInFields.push({ value: undefined, viewValue: "כל השדות" });
+    this.searchInFields.push({ value: undefined, viewValue: "שדות הטקסט הנפוצים" });
     this.searchInFields.push({ value: "dcTitle", viewValue: "הכותרת" });
     this.searchInFields.push({ value: "dcDescription", viewValue: "התיאור" });
     this.searchInFields.push({ value: "storageLocation", viewValue: "המיקום" });
+    this.searchInFields.push({ value: "id", viewValue: "מזהה רשומה" });
   }
 
   initDcTypeList() {
