@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
-import { ArchieDocumentService } from "../archie-document.service";
+import { AbstractArchieDocService } from "../services/abstract-archie-doc-service";
 import { UsersService } from "../users.service";
 import { StorageService } from "../storage.service";
 import { ArchieDoc } from "../model/archie-doc";
@@ -23,7 +23,7 @@ export class EditDocumentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private archieDocumentService: ArchieDocumentService,
+    private archieDocumentService: AbstractArchieDocService,
     private storageService: StorageService,
     private usersService: UsersService
   ) { }

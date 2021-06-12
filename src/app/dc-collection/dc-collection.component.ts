@@ -1,7 +1,7 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ArchieDocumentService } from "../archie-document.service";
+import { AbstractArchieDocService } from "../services/abstract-archie-doc-service";
 import { ArchieDoc } from "../model/archie-doc";
 import { UsersService } from "../users.service";
 
@@ -18,7 +18,7 @@ export class DcCollectionComponent implements OnInit {
     private router: Router,
     private location: Location,
     private usersService: UsersService,
-    private archieDocumentService: ArchieDocumentService
+    private archieDocumentService: AbstractArchieDocService
   ) { }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class DcCollectionComponent implements OnInit {
   getDocDetails(): void {
     const dcTitle = '"' + this.route.snapshot.paramMap.get("dcTitle") + '"';
     this.archieDocumentService
-      .getSearchResults("q=dcType:collection&fq=dcTitleString:" + dcTitle, 1, 1)
+      .getSearchResults("q=dcType:collection&fq=dcTitleString:" + dcTitle, 1, 1, false)
       .subscribe((data: any) => this.processSearchResults(data));
   }
 

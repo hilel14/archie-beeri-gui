@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 
-import { ArchieDocumentService } from "../archie-document.service";
+import { AbstractArchieDocService } from "../services/abstract-archie-doc-service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -12,7 +12,7 @@ export class WelcomeComponent implements OnInit {
   dcTypes: (string | number)[];
 
   constructor(
-    private archieDocumentService: ArchieDocumentService,
+    private archieDocumentService: AbstractArchieDocService,
     private router: Router
   ) { }
 

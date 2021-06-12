@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
-import { ArchieDocumentService } from "../../archie-document.service";
+import { AbstractReportsService } from "../../services/abstract-reports-service";
 
 export interface ImportFolder {
   id: number;
@@ -24,7 +24,7 @@ export class ImportFolderReportComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private archieDocumentService: ArchieDocumentService
+    private reportsService: AbstractReportsService
   ) { }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class ImportFolderReportComponent implements OnInit {
   }
 
   getImportFolders(): void {
-    this.archieDocumentService
+    this.reportsService
       .getImportFoldersReport()
       .subscribe(
         (data: ImportFolder[]) => (this.importFolders = data)

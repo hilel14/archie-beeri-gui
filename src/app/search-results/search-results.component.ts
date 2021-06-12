@@ -6,7 +6,7 @@ import { saveAs } from 'file-saver';
 import { stringify } from "@angular/compiler/src/util";
 import { isNgTemplate } from "@angular/compiler";
 
-import { ArchieDocumentService } from "../archie-document.service";
+import { AbstractArchieDocService } from "../services/abstract-archie-doc-service";
 import { SearchParams } from '../model/search-params'
 import { UsersService } from "../users.service";
 import { StorageService } from "../storage.service";
@@ -33,7 +33,7 @@ export class SearchResultsComponent implements OnInit {
     private router: Router,
     private location: Location,
     public dialog: MatDialog,
-    private archieDocumentService: ArchieDocumentService,
+    private archieDocumentService: AbstractArchieDocService,
     private usersService: UsersService,
     private storageService: StorageService
   ) { }
@@ -63,7 +63,7 @@ export class SearchResultsComponent implements OnInit {
     this.updateUrlFromModel();
     this.buildSolrSearchQuery();
     this.archieDocumentService
-      .getSearchResults(this.searchQuery, this.searchParams.firstRow, this.searchParams.numberOfRows)
+      .getSearchResults(this.searchQuery, this.searchParams.firstRow, this.searchParams.numberOfRows, false)
       .subscribe((data: any) => this.processSearchResults(data));
   }
 

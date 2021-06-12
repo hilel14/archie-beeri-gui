@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
-import { ArchieDocumentService } from "../../archie-document.service";
+import { AbstractReportsService } from "../../services/abstract-reports-service";
 
 export interface ImportFile {
   id: string;
@@ -42,7 +42,7 @@ export class ImportFileReportComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private archieDocumentService: ArchieDocumentService
+    private reportsService: AbstractReportsService
   ) { }
 
   ngOnInit() {
@@ -51,7 +51,7 @@ export class ImportFileReportComponent implements OnInit {
 
   getImportFiles(): void {
     const folderId = this.route.snapshot.paramMap.get("folderId");
-    this.archieDocumentService
+    this.reportsService
       .getImportFilesReport(folderId)
       .subscribe(
         (data: ImportFolder) => (this.processResults(data))

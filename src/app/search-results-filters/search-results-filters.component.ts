@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { SearchParams } from '../model/search-params'
 import { SelectOption } from '../model/select-option'
-import { ArchieDocumentService } from "../archie-document.service";
+import { AbstractArchieDocService } from "../services/abstract-archie-doc-service";
 
 @Component({
   selector: 'app-search-results-filters',
@@ -18,7 +18,7 @@ export class SearchResultsFiltersComponent implements OnInit {
   dcTypes: SelectOption[] = [];
   searchInFields: SelectOption[] = [];
 
-  constructor(private archieDocumentService: ArchieDocumentService) { }
+  constructor(private archieDocumentService: AbstractArchieDocService) { }
 
   ngOnInit(): void {
     this.getCreators();

@@ -5,10 +5,11 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 
-import { environment } from '../environments/environment';
-import { ArchieDoc } from "./model/archie-doc";
-import { ImportAttributes } from "./model/import-attributes";
-import { Remarks } from "./model/remarks";
+import { AbstractArchieDocService } from '../abstract-archie-doc-service';
+import { environment } from '../../../environments/environment';
+import { ArchieDoc } from "../../model/archie-doc";
+import { ImportAttributes } from "../../model/import-attributes";
+import { Remarks } from "../../model/remarks";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -17,7 +18,7 @@ const httpOptions = {
 @Injectable({
   providedIn: "root"
 })
-export class ArchieDocumentService {
+export class ArchieDocumentService implements AbstractArchieDocService {
 
   private docsUrl: string;
   private exportUrl: string;
@@ -61,25 +62,11 @@ export class ArchieDocumentService {
       .pipe(catchError(this.handleError("getImportFolders", [])));
   }
 
-  getImportFoldersReport(): Observable<any> {
-    let url = this.apiUrl + "/reports/import-folders";
-    return this.http
-      .get<any>(url)
-      .pipe(catchError(this.handleError("getImportFoldersReport", [])));
-  }
-
-  getImportFilesReport(folderId: string): Observable<any> {
-    let url = this.apiUrl + "/reports/import-folder/" + folderId;
-    return this.http
-      .get<any>(url)
-      .pipe(catchError(this.handleError("getImportFoldersReport", [])));
-  }
-
   getSearchResults(
     searchParams: string,
     start: number,
     rows: number,
-    content: boolean = false
+    content: boolean
   ): Observable<any> {
     let fieldList = "id,dcTitle,dcDate,dcCreator,dcDescription,dcSubject,storageLocation,dcFormat,dcType,dcIsPartOf,dcAccessRights,importTime";
     if (content) {

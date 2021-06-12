@@ -9,7 +9,6 @@ import { GoogleLoginProvider } from "angularx-social-login";
 import { Credentials } from "./model/credentials";
 import { User } from "./model/user";
 import { environment } from "src/environments/environment";
-import { ArchieDocumentService } from './archie-document.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })

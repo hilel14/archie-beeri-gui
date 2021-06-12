@@ -29,6 +29,8 @@ import { AboutComponent } from './about/about.component';
 import { RemarksDialogComponent } from './remarks-dialog/remarks-dialog.component';
 import { SearchResultsFiltersComponent } from './search-results-filters/search-results-filters.component';
 import { SearchResultsNavbarComponent } from './search-results-navbar/search-results-navbar.component';
+import { env } from "process";
+import { environment } from "src/environments/environment";
 
 registerLocaleData(localeHe, "he", localeHeExtra);
 
@@ -65,6 +67,7 @@ registerLocaleData(localeHe, "he", localeHeExtra);
   entryComponents: [
     RemarksDialogComponent
   ],
+  /*
   providers: [
     { provide: LOCALE_ID, useValue: "he" },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -83,6 +86,8 @@ registerLocaleData(localeHe, "he", localeHeExtra);
       } as SocialAuthServiceConfig,
     }
   ],
+  */
+  providers: environment.providers,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

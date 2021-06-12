@@ -2,8 +2,18 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { version } from '../../package.json';
-import { dependencies } from '../../package.json';
+import { LOCALE_ID, NgModule } from "@angular/core";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { GoogleLoginProvider } from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+
+import { version, dependencies } from '../../package.json';
+
+import { JwtInterceptor } from "../app/jwt-interceptor";
+import { AbstractArchieDocService } from '../app/services/abstract-archie-doc-service';
+import { MockArchieDocService } from '../app/services/dev/mock-archie-doc-service';
+import { AbstractReportsService } from '../app/services/abstract-reports-service';
+import { MockReportsService } from '../app/services/dev/mock-reports-service';
 
 export const environment = {
    production: false,
@@ -16,7 +26,27 @@ export const environment = {
       archie: version,
       angular: dependencies["@angular/core"],
       material: dependencies["@angular/material"]
-   }
+   },
+   providers: [
+      { provide: AbstractArchieDocService, useClass: MockArchieDocService },
+      { provide: AbstractReportsService, useClass: MockReportsService },
+      { provide: LOCALE_ID, useValue: "he" },
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+      {
+         provide: 'SocialAuthServiceConfig',
+         useValue: {
+            autoLogin: false,
+            providers: [
+               {
+                  id: GoogleLoginProvider.PROVIDER_ID,
+                  provider: new GoogleLoginProvider(
+                     '573921547371-qt1ncdtd7u17ru358hkkko4agucih7cd'
+                  ),
+               }
+            ],
+         } as SocialAuthServiceConfig,
+      }
+   ]
 };
 
 /*

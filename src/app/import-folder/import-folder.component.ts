@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { ArchieDocumentService } from "../archie-document.service";
+import { AbstractArchieDocService } from "../services/abstract-archie-doc-service";
 import { ImportAttributes } from "../model/import-attributes";
 
 
@@ -17,7 +17,7 @@ export class ImportFolderComponent implements OnInit {
   dcCollections: (string)[];
 
   constructor(
-    private archieDocumentService: ArchieDocumentService,
+    private archieDocumentService: AbstractArchieDocService,
     private router: Router) { }
 
   ngOnInit() {
