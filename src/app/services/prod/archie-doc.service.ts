@@ -34,7 +34,7 @@ export class ArchieDocumentService implements AbstractArchieDocService {
     let url = this.docsUrl + "&q=*:*&fl=id&facet=on&facet.field=dcType";
     return this.http
       .get<any>(url)
-      .pipe(catchError(this.handleError("getSummary", [])));
+      .pipe(catchError(this.handleError("getDcTypes", [])));
   }
 
   getDcCreators(): Observable<any> {
