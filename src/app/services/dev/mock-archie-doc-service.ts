@@ -47,22 +47,58 @@ export class MockArchieDocService implements AbstractArchieDocService {
         };
         return of(collections);
     }
-    public getSearchResults(): Observable<any> {
+    public getSearchResults(
+        searchParams: string,
+        start: number,
+        rows: number,
+        content: boolean
+    ): Observable<any> {
         let results = {
             "response": {
-                "numFound": 143452, "start": 0, "docs": [
+                "numFound": 3, "start": 0, "docs": [
                     {
+                        "id": "doc1",
+                        "dcCreator": ["יוסף טרומפלדור", "יוסף סטלין"],
+                        "dcDate": "2017-09-30T00:00:00Z",
+                        "dcDescription": "סיפורם של 60 מחברי קיבוץ בארי",
                         "dcFormat": "pdf",
-                        "id": "b788131a-e98b-4cc5-8066-509f1e4ec165"
+                        "dcTitle": "סיפורי חיים 2017 - הספר",
+                        "importTime": "2018-08-07T12:44:19.052Z",
+                        "storageLocation": "ארון 6 מדף 2",
+                        "dcAccessRights": "private",
+                        "dcType": "text",
+                        "dcIsPartOf": "כללי",
+                        "dcSubject": ["חברים"]
                     },
                     {
+                        "id": "doc2",
+                        "importTime": "2020-07-07T16:17:49.643Z",
+                        "dcAccessRights": "private",
+                        "dcDate": "2020-05-28T21:00:00Z",
                         "dcFormat": "jpg",
-                        "id": "55414937-ab0a-486a-8744-58553c76f4ff"
-                    }]
+                        "dcType": "image",
+                        "dcTitle": "לוגו לאתר בארי - חשמליה - מיזוג",
+                        "dcIsPartOf": "כללי",
+                        "dcCreator": ["אבי רון"],
+                        "dcDescription": "לוגואים שעוצבו לכבוד אתר האינטרנט החדש של קיבוץ בארי"
+                    },
+                    {
+                        "id": "doc3",
+                        "importTime": "2020-07-07T16:17:49.940Z",
+                        "dcAccessRights": "private",
+                        "dcDate": "2020-05-28T21:00:00Z",
+                        "dcFormat": "jpg",
+                        "dcType": "image",
+                        "dcTitle": "טיול משפחות לכנרת",
+                        "dcIsPartOf": "כללי",
+                        "dcDescription": "עומדים מימין לשמאל: אברהם, יצחק, יעקב, שרה, קבל סתירה"
+                    }
+                ]
             },
             "highlighting": {
-                "b788131a-e98b-4cc5-8066-509f1e4ec165": {},
-                "55414937-ab0a-486a-8744-58553c76f4ff": {}
+                "doc1": {},
+                "doc2": {},
+                "doc3": {}
             }
         };
         return of(results);
