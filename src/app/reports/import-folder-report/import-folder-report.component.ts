@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
-import { AbstractReportsService } from "../../services/abstract-reports-service";
+import { AbstractReportsService } from "../../_services/abstract-reports-service";
 
 export interface ImportFolder {
   id: number;

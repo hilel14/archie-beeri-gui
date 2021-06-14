@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 
-import { AbstractArchieDocService } from "../services/abstract-archie-doc-service";
+import { AbstractArchieDocService } from "../_services/abstract-archie-doc-service";
 import { Router } from "@angular/router";
 
 @Component({

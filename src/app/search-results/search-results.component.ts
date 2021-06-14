@@ -6,10 +6,11 @@ import { saveAs } from 'file-saver';
 import { stringify } from "@angular/compiler/src/util";
 import { isNgTemplate } from "@angular/compiler";
 
-import { AbstractArchieDocService } from "../services/abstract-archie-doc-service";
+import { AbstractArchieDocService } from "../_services/abstract-archie-doc-service";
+import { AbstractStorageService } from "../_services/abstract-storage-service";
 import { SearchParams } from '../model/search-params'
 import { UsersService } from "../users.service";
-import { StorageService } from "../storage.service";
+import { StorageService } from "../_services/prod/storage.service";
 import { RemarksDialogComponent } from "../remarks-dialog/remarks-dialog.component";
 import { ArchieDoc } from "../model/archie-doc";
 import { SelectOption } from "../model/select-option";
@@ -35,7 +36,7 @@ export class SearchResultsComponent implements OnInit {
     public dialog: MatDialog,
     private archieDocumentService: AbstractArchieDocService,
     private usersService: UsersService,
-    private storageService: StorageService
+    private storageService: AbstractStorageService
   ) { }
 
   ngOnInit() {

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { SearchParams } from '../model/search-params'
 import { SelectOption } from '../model/select-option'
-import { AbstractArchieDocService } from "../services/abstract-archie-doc-service";
+import { AbstractArchieDocService } from "../_services/abstract-archie-doc-service";
 
 @Component({
   selector: 'app-search-results-filters',

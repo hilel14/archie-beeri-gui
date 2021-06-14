@@ -10,10 +10,12 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { version, dependencies } from '../../package.json';
 
 import { JwtInterceptor } from "../app/jwt-interceptor";
-import { AbstractArchieDocService } from '../app/services/abstract-archie-doc-service';
-import { MockArchieDocService } from '../app/services/dev/mock-archie-doc-service';
-import { AbstractReportsService } from '../app/services/abstract-reports-service';
-import { MockReportsService } from '../app/services/dev/mock-reports-service';
+import { AbstractArchieDocService } from '../app/_services/abstract-archie-doc-service';
+import { MockArchieDocService } from '../app/_services/dev/mock-archie-doc-service';
+import { AbstractReportsService } from '../app/_services/abstract-reports-service';
+import { MockReportsService } from '../app/_services/dev/mock-reports-service';
+import { AbstractStorageService } from "../app/_services/abstract-storage-service";
+import { MockStorageService } from '../app/_services/dev/mock-storage-service';
 
 export const environment = {
    production: false,
@@ -30,6 +32,7 @@ export const environment = {
    providers: [
       { provide: AbstractArchieDocService, useClass: MockArchieDocService },
       { provide: AbstractReportsService, useClass: MockReportsService },
+      { provide: AbstractStorageService, useClass: MockStorageService },
       { provide: LOCALE_ID, useValue: "he" },
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
       {

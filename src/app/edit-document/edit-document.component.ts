@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
-import { AbstractArchieDocService } from "../services/abstract-archie-doc-service";
+import { AbstractArchieDocService } from "../_services/abstract-archie-doc-service";
 import { UsersService } from "../users.service";
-import { StorageService } from "../storage.service";
+import { StorageService } from "../_services/prod/storage.service";
 import { ArchieDoc } from "../model/archie-doc";
 
 @Component({
