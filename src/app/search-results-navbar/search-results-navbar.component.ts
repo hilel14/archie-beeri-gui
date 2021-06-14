@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SearchParams } from "../model/search-params";
+import { SearchParams } from "../_model/search-params";
 
 @Component({
   selector: 'app-search-results-navbar',

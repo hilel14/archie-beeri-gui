@@ -1,8 +1,8 @@
 import { Observable, of } from 'rxjs';
 import { AbstractArchieDocService } from '../abstract-archie-doc-service';
-import { ArchieDoc } from '../../model/archie-doc';
-import { ImportAttributes } from '../../model/import-attributes';
-import { Remarks } from '../../model/remarks';
+import { ArchieDoc } from '../../_model/archie-doc';
+import { ImportAttributes } from '../../_model/import-attributes';
+import { Remarks } from '../../_model/remarks';
 
 
 export class MockArchieDocService implements AbstractArchieDocService {

@@ -8,12 +8,12 @@ import { isNgTemplate } from "@angular/compiler";
 
 import { AbstractArchieDocService } from "../_services/abstract-archie-doc-service";
 import { AbstractStorageService } from "../_services/abstract-storage-service";
-import { SearchParams } from '../model/search-params'
+import { SearchParams } from '../_model/search-params'
 import { UsersService } from "../users.service";
 import { StorageService } from "../_services/prod/storage.service";
 import { RemarksDialogComponent } from "../remarks-dialog/remarks-dialog.component";
-import { ArchieDoc } from "../model/archie-doc";
-import { SelectOption } from "../model/select-option";
+import { ArchieDoc } from "../_model/archie-doc";
+import { SelectOption } from "../_model/select-option";
 
 
 @Component({

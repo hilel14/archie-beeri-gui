@@ -7,9 +7,9 @@ import { catchError, map, tap } from "rxjs/operators";
 
 import { AbstractArchieDocService } from '../abstract-archie-doc-service';
 import { environment } from '../../../environments/environment';
-import { ArchieDoc } from "../../model/archie-doc";
-import { ImportAttributes } from "../../model/import-attributes";
-import { Remarks } from "../../model/remarks";
+import { ArchieDoc } from "../../_model/archie-doc";
+import { ImportAttributes } from "../../_model/import-attributes";
+import { Remarks } from "../../_model/remarks";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })

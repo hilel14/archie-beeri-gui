@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { SearchParams } from '../model/search-params'
-import { SelectOption } from '../model/select-option'
+import { SearchParams } from '../_model/search-params'
+import { SelectOption } from '../_model/select-option'
 import { AbstractArchieDocService } from "../_services/abstract-archie-doc-service";
 
 @Component({

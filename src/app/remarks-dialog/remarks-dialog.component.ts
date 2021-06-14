@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ArchieDoc } from "../model/archie-doc";
-import { Remarks } from "../model/remarks";
+import { ArchieDoc } from "../_model/archie-doc";
+import { Remarks } from "../_model/remarks";
 
 
 @Component({

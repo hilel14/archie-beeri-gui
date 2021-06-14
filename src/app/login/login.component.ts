@@ -3,7 +3,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from '@angular/material/icon';
 
 import { UsersService } from "../users.service";
-import { User } from "../model/user";
+import { User } from "../_model/user";
 
 const googleLogoURL =
   "https://raw.githubusercontent.com/fireflysemantics/logo/master/Google.svg";

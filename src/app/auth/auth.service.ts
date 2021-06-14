@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { User } from "../model/user";
+import { User } from "../_model/user";
 
 @Injectable({
   providedIn: 'root'

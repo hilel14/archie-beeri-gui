@@ -1,10 +1,10 @@
 import { forwardRef } from "@angular/core";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { ArchieDoc } from "../model/archie-doc";
+import { ArchieDoc } from "../_model/archie-doc";
 import { MockArchieDocService } from "./dev/mock-archie-doc-service";
-import { ImportAttributes } from "../model/import-attributes";
-import { Remarks } from "../model/remarks";
+import { ImportAttributes } from "../_model/import-attributes";
+import { Remarks } from "../_model/remarks";
 
 @Injectable({
     providedIn: "root"

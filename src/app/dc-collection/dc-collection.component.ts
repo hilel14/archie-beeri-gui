@@ -2,7 +2,7 @@ import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AbstractArchieDocService } from "../_services/abstract-archie-doc-service";
-import { ArchieDoc } from "../model/archie-doc";
+import { ArchieDoc } from "../_model/archie-doc";
 import { UsersService } from "../users.service";
 
 

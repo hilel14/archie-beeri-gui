@@ -6,8 +6,8 @@ import { catchError } from "rxjs/operators";
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 
-import { Credentials } from "./model/credentials";
-import { User } from "./model/user";
+import { Credentials } from "./_model/credentials";
+import { User } from "./_model/user";
 import { environment } from "src/environments/environment";
 
 const httpOptions = {
