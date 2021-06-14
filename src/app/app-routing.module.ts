@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { RoleGuardService as RoleGuard } from './auth/role-guard.service';
+import { RoleGuardService as RoleGuard } from './_services/role-guard.service';
 import { DcCollectionComponent } from "./dc-collection/dc-collection.component";
 import { EditDocumentComponent } from "./edit-document/edit-document.component";
 import { ImportFolderComponent } from "./import-folder/import-folder.component";
