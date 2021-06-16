@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AbstractArchieDocService } from "../_services/abstract-archie-doc-service";
 import { ArchieDoc } from "../_model/archie-doc";
-import { UsersService } from "../users.service";
+import { AbstractUsersService } from "../_services/abstract-users-service";
 
 
 @Component({
@@ -17,7 +17,7 @@ export class DcCollectionComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private usersService: UsersService,
+    private usersService: AbstractUsersService,
     private archieDocumentService: AbstractArchieDocService
   ) { }
 

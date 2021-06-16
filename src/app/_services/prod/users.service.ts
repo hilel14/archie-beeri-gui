@@ -6,9 +6,10 @@ import { catchError } from "rxjs/operators";
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 
-import { Credentials } from "./_model/credentials";
-import { User } from "./_model/user";
+import { Credentials } from "../../_model/credentials";
+import { User } from "../../_model/user";
 import { environment } from "src/environments/environment";
+import { AbstractUsersService } from "../abstract-users-service";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -17,7 +18,7 @@ const httpOptions = {
 @Injectable({
   providedIn: "root"
 })
-export class UsersService {
+export class UsersService implements AbstractUsersService {
   private baseUrl: string;
 
   constructor(private router: Router, private http: HttpClient, private authService: SocialAuthService) {

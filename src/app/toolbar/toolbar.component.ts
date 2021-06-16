@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { UsersService } from "../users.service";
+import { AbstractUsersService } from "../_services/abstract-users-service";
 import { User } from "../_model/user";
 
 @Component({
@@ -9,7 +9,7 @@ import { User } from "../_model/user";
   styleUrls: ["./toolbar.component.css"]
 })
 export class ToolbarComponent implements OnInit {
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: AbstractUsersService) {}
 
   ngOnInit() {}
 
@@ -18,7 +18,7 @@ export class ToolbarComponent implements OnInit {
     return user ? user.fullname : "אורח";
   }
 
-  getUsersService(): UsersService {
+  getUsersService(): AbstractUsersService {
     return this.usersService;
   }
 }

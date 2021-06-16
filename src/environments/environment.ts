@@ -3,19 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 import { LOCALE_ID, NgModule } from "@angular/core";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { GoogleLoginProvider } from 'angularx-social-login';
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-
 import { version, dependencies } from '../../package.json';
 
-import { JwtInterceptor } from "../app/jwt-interceptor";
 import { AbstractArchieDocService } from '../app/_services/abstract-archie-doc-service';
 import { MockArchieDocService } from '../app/_services/dev/mock-archie-doc-service';
 import { AbstractReportsService } from '../app/_services/abstract-reports-service';
 import { MockReportsService } from '../app/_services/dev/mock-reports-service';
 import { AbstractStorageService } from "../app/_services/abstract-storage-service";
 import { MockStorageService } from '../app/_services/dev/mock-storage-service';
+import { AbstractUsersService } from "../app/_services/abstract-users-service";
+import { MockUsersService } from '../app/_services/dev/mock-users-service';
+
 
 export const environment = {
    production: false,
@@ -33,22 +31,8 @@ export const environment = {
       { provide: AbstractArchieDocService, useClass: MockArchieDocService },
       { provide: AbstractReportsService, useClass: MockReportsService },
       { provide: AbstractStorageService, useClass: MockStorageService },
-      { provide: LOCALE_ID, useValue: "he" },
-      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-      {
-         provide: 'SocialAuthServiceConfig',
-         useValue: {
-            autoLogin: false,
-            providers: [
-               {
-                  id: GoogleLoginProvider.PROVIDER_ID,
-                  provider: new GoogleLoginProvider(
-                     '573921547371-qt1ncdtd7u17ru358hkkko4agucih7cd'
-                  ),
-               }
-            ],
-         } as SocialAuthServiceConfig,
-      }
+      { provide: AbstractUsersService, useClass: MockUsersService },
+      { provide: LOCALE_ID, useValue: "he" }
    ]
 };
 

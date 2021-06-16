@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from '@angular/material/icon';
 
-import { UsersService } from "../users.service";
+import { AbstractUsersService } from "../_services/abstract-users-service";
 import { User } from "../_model/user";
 
 const googleLogoURL =
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private usersService: UsersService, private matIconRegistry: MatIconRegistry,
+  constructor(private usersService: AbstractUsersService, private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(
       "logo",
