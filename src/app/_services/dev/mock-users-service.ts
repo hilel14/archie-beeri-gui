@@ -13,11 +13,18 @@ export class MockUsersService implements AbstractUsersService {
     }
 
     public login(username: string, password: string): void {
-        console.info("MockUsersService.login user=" + username + "password=" + password);
+        let user: User = {
+            id: 1,
+            username: username,
+            fullname: "Avi Ron",
+            role: "manager",
+            token: "abcd-1234"
+        };
+        this.storeUserDetails(user);
     }
 
     public googleLogin(): void {
-        console.info("google login completed");
+        console.info("mock google login...");
     }
 
     hasPermission(roles: string[]): boolean {
