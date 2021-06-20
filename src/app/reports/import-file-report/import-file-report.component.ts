@@ -3,7 +3,9 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { AbstractReportsService } from "../../_services/abstract-reports-service";
+import { ImportFolder, ImportFile } from "../../_model/import-folder-report";
 
+/*
 export interface ImportFile {
   id: string;
   importFolderId: number;
@@ -16,11 +18,12 @@ export interface ImportFile {
 
 export interface ImportFolder {
   id: number;
-  importTime: Date;
   folderName: String;
   fileCount: number;
+  importTime: Date;
   files: ImportFile[];
 }
+*/
 
 export interface StatusSummary {
   started: number;

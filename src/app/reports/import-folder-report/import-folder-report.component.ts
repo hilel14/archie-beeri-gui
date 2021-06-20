@@ -3,14 +3,17 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { AbstractReportsService } from "../../_services/abstract-reports-service";
+import { ImportFolder } from "../../_model/import-folder-report";
 
+/*
 export interface ImportFolder {
   id: number;
   folderName: string;
+  fileCount: number;
   importTimeFormatted: string;
   importDateFormatted: string;
-  fileCount: number;
 }
+*/
 
 @Component({
   selector: "app-import-folder-report",

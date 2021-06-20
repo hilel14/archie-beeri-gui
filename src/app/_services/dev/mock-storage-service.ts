@@ -11,13 +11,6 @@ export class MockStorageService implements AbstractStorageService {
 
     getUrl(dcAccessRights: string, assetType: string, id: string, dcFormat: string): string {
         return "assets/samples/image.jpg";
-        /*
-      return environment.assetStore[dcAccessRights]
-        + "/"
-        + assetType
-        + "/"
-        + id + "." + dcFormat;
-        */
     }
 
 }

@@ -9,16 +9,10 @@
     <div fxLayout="row" *ngFor="let folder of importFolders" class="table-row"
       [class.active]="folder == selectedFolder">
       <div fxLayout="column" fxFlex="25%" class="table-column">
-        {{ folder.importDateFormatted }}
-        <!--
-        {{ folder.importTimeStampFormatted | date : 'longDate' : undefined : 'he'}}
-        -->
+        {{ folder.importTime | date : 'longDate' : undefined : 'he'}}
       </div>
       <div fxLayout="column" fxFlex="25%" class="table-column">
-        {{ folder.importTimeFormatted }}
-        <!--
-        {{ folder.importTimeStampFormatted | date : 'HH:mm:ss' }}
-        -->
+        {{ folder.importTime | date : 'HH:mm:ss' }}
       </div>
       <div fxLayout="column" fxFlex="25%" class="table-column" dir="auto">
         <a routerLink="/import-file-report/{{folder.id}}">
