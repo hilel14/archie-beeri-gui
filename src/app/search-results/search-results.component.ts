@@ -185,26 +185,29 @@ export class SearchResultsComponent implements OnInit {
   buildSolrSearchQuery(): void {
     // search term
     let q = "";
-    let userInput = this.escapeQueryChars(this.searchParams.searchTerm.trim());
+    this.searchParams.searchTerm = this.searchParams.searchTerm.trim();
+    let userInput = this.searchParams.searchTerm ? this.escapeQueryChars(this.searchParams.searchTerm) : "*";
     // search term modifier
-    switch (this.searchParams.searchTermModifier) {
-      case "fuzzy":
-        q = userInput + "~";
-        break;
-      case "exact":
-        q = "\"" + userInput + "\"";
-        break;
-      case "any":
-        q = userInput.split(" ").join(" AND ");
-        break;
-      case "start":
-        q = userInput + "*";
-        break;
-      case "end":
-        q = "*" + userInput;
-        break;
-      default:
-        console.log("Unknown term modifier: " + this.searchParams.searchTermModifier);
+    if (userInput !== "*") {
+      switch (this.searchParams.searchTermModifier) {
+        case "fuzzy":
+          q = userInput + "~";
+          break;
+        case "exact":
+          q = "\"" + userInput + "\"";
+          break;
+        case "any":
+          q = userInput.split(" ").join(" AND ");
+          break;
+        case "start":
+          q = userInput + "*";
+          break;
+        case "end":
+          q = "*" + userInput;
+          break;
+        default:
+          console.log("Unknown term modifier: " + this.searchParams.searchTermModifier);
+      }
     }
     // search in fields
     this.searchQuery = this.searchParams.searchInFields ? "q=" + this.searchParams.searchInFields + ":" + q : "q=" + q;
