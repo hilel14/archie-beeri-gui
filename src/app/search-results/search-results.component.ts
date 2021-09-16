@@ -28,6 +28,7 @@ export class SearchResultsComponent implements OnInit {
   searchQuery: string;
   highlighting: {};
   defaultNumberOfRows: number = 5;
+  separator: string = ":::"
 
   constructor(
     private route: ActivatedRoute,
@@ -84,7 +85,7 @@ export class SearchResultsComponent implements OnInit {
     this.route.queryParamMap.subscribe((params: { [key: string]: any }) => {
       // search term
       if (params.get("q")) {
-        let q: string[] = params.get("q").split(":");
+        let q: string[] = params.get("q").split(this.separator);
         if (q.length > 1) {
           this.searchParams.searchInFields = q[0];
           this.searchParams.searchTerm = q[1];
@@ -103,7 +104,7 @@ export class SearchResultsComponent implements OnInit {
       let fq: Array<string> = params.getAll("fq");
       if (fq) {
         for (let i = 0; i < fq.length; i++) {
-          let parts: Array<string> = fq[i].split(":");
+          let parts: Array<string> = fq[i].split(this.separator);
           switch (parts[0]) {
             case "dcType":
               this.searchParams.dcTypeFilter = parts[1];
@@ -138,10 +139,11 @@ export class SearchResultsComponent implements OnInit {
   }
 
   updateUrlFromModel(): void {
+
     let queryParams: Params = {};
     // search term
     if (this.searchParams.searchInFields) {
-      queryParams['q'] = this.searchParams.searchInFields + ":" + this.searchParams.searchTerm;
+      queryParams['q'] = this.searchParams.searchInFields + this.separator + this.searchParams.searchTerm;
     } else {
       queryParams['q'] = this.searchParams.searchTerm;
     }
@@ -152,19 +154,19 @@ export class SearchResultsComponent implements OnInit {
     // filter query params
     let fq: Array<string> = [];
     if (this.searchParams.dcTypeFilter) {
-      fq.push("dcType:" + this.searchParams.dcTypeFilter);
+      fq.push("dcType" + this.separator + this.searchParams.dcTypeFilter);
     }
     if (this.searchParams.dcCreatorFilter) {
       fq.push("dcCreator:" + this.searchParams.dcCreatorFilter);
     }
     if (this.searchParams.startDateFilter) {
-      fq.push("startDate:" + this.formatDcDate(this.searchParams.startDateFilter, false));
+      fq.push("startDate" + this.separator + this.formatDcDate(this.searchParams.startDateFilter, false));
     }
     if (this.searchParams.endDateFilter) {
-      fq.push("endDate:" + this.formatDcDate(this.searchParams.endDateFilter, false));
+      fq.push("endDate" + this.separator + this.formatDcDate(this.searchParams.endDateFilter, false));
     }
     if (this.searchParams.dcCollectionFilter) {
-      fq.push("dcIsPartOf:" + this.searchParams.dcCollectionFilter);
+      fq.push("dcIsPartOf" + this.separator + this.searchParams.dcCollectionFilter);
     }
     if (fq.length > 0) {
       queryParams['fq'] = fq;
@@ -182,7 +184,7 @@ export class SearchResultsComponent implements OnInit {
   buildSolrSearchQuery(): void {
     // search term
     let q = "";
-    let userInput = this.searchParams.searchTerm.trim().split(":").join(" ");
+    let userInput = this.escapeQueryChars(this.searchParams.searchTerm.trim());
     // search term modifier
     switch (this.searchParams.searchTermModifier) {
       case "fuzzy":
@@ -213,7 +215,7 @@ export class SearchResultsComponent implements OnInit {
     }
     // dcCreator filter
     if (this.searchParams.dcCreatorFilter) {
-      this.searchQuery += "&fq=dcCreator:" + '"' + this.searchParams.dcCreatorFilter + '"';
+      this.searchQuery += "&fq=dcCreator:" + '"' + this.escapeQueryChars(this.searchParams.dcCreatorFilter) + '"';
     }
     // collection filter
     if (this.searchParams.dcCollectionFilter) {
@@ -354,6 +356,22 @@ export class SearchResultsComponent implements OnInit {
 
   hasPermission(roles: string[]): boolean {
     return this.usersService.hasPermission(roles);
+  }
+
+  escapeQueryChars(text: string): string {
+    /*
+    Solr query special characters
+    + - && || ! ( ) { } [ ] ^ " ~ * ? : \ / 
+    Example:
+    (1+1):2
+     \(1\+1\)\:2
+     Javascript escape character \ needs to be escated to \\
+    */
+    let chars: Array<string> = ['+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '\\', '/'];
+    chars.forEach((s: string) => {
+      text = text.replace(/s/g, "\\" + s);
+    });
+    return text;
   }
 
   openDialog(doc: ArchieDoc): void {
