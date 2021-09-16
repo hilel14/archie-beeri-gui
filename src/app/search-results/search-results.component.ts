@@ -188,7 +188,9 @@ export class SearchResultsComponent implements OnInit {
     this.searchParams.searchTerm = this.searchParams.searchTerm.trim();
     let userInput = this.searchParams.searchTerm ? this.escapeQueryChars(this.searchParams.searchTerm) : "*";
     // search term modifier
-    if (userInput !== "*") {
+    if (userInput === "*") {
+      q = "*"
+    } else {
       switch (this.searchParams.searchTermModifier) {
         case "fuzzy":
           q = userInput + "~";
