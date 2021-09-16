@@ -25,9 +25,9 @@ export class ArchieDocumentService implements AbstractArchieDocService {
   private apiUrl: string;
 
   constructor(private http: HttpClient) {
-    this.docsUrl = environment.locationOrigin + "/docs?wt=json&indent=on";
-    this.exportUrl = environment.locationOrigin + "/docs?wt=csv";
-    this.apiUrl = environment.locationOrigin + "/api/rest";
+    this.docsUrl = "https://archie.beeri.org.il" + "/docs?wt=json&indent=on";
+    this.exportUrl = "https://archie.beeri.org.il" + "/docs?wt=csv";
+    this.apiUrl = "https://archie.beeri.org.il" + "/api/rest";
   }
 
   getDcTypes(): Observable<any> {
