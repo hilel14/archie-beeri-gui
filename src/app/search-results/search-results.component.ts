@@ -157,7 +157,7 @@ export class SearchResultsComponent implements OnInit {
       fq.push("dcType" + this.separator + this.searchParams.dcTypeFilter);
     }
     if (this.searchParams.dcCreatorFilter) {
-      fq.push("dcCreator:" + this.searchParams.dcCreatorFilter);
+      fq.push("dcCreator" + this.separator + this.searchParams.dcCreatorFilter);
     }
     if (this.searchParams.startDateFilter) {
       fq.push("startDate" + this.separator + this.formatDcDate(this.searchParams.startDateFilter, false));
@@ -178,6 +178,7 @@ export class SearchResultsComponent implements OnInit {
     queryParams['firstRow'] = this.searchParams.firstRow;
     queryParams['numberOfRows'] = this.searchParams.numberOfRows;
     // update browser address bar
+    console.log(queryParams);
     this.router.navigate(["/search"], { queryParams: queryParams });
   }
 
