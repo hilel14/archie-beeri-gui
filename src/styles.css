@@ -7,7 +7,7 @@ Angular Material pre-built themes:
 */
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import url(http://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+@import url(https://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
 
 body {
   margin: 0;
