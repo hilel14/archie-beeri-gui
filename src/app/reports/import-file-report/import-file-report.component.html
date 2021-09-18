@@ -16,10 +16,10 @@
     </div>
     <div fxLayout="row" *ngFor="let file of importFolder.files" class="table-row">
       <div fxLayout="column" fxFlex="25%" class="table-column">
-        {{ file.importTime | date : 'longDate' : undefined : 'he'}}
+        {{ file.importDateFormatted }}
       </div>
       <div fxLayout="column" fxFlex="25%" class="table-column">
-        {{ file.importTime | date : 'HH:mm:ss' }}
+        {{ file.importTimeFormatted }}
       </div>
       <div fxLayout="column" fxFlex="25%" class="table-column" dir="ltr"
         [ngClass]="{'imported': file.statusCode > 0, 'rejected':file.statusCode < 0 }">
