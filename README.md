@@ -63,6 +63,8 @@ https://angular.io/guide/i18n
 * npm install
 * Commit changes. Remark: prepare for next development iteration
 * ng build --prod
-* rm -rf /var/www/archie/beeri/*
-* mv dist/archie-beeri-ui/* /var/www/archie/beeri
-
+* Local
+  * rm -rf /var/www/archie/beeri/*
+  * mv dist/archie-beeri-ui/* /var/www/archie/beeri
+* Remote
+  * aws --profile=beeri s3 sync dist/archie-beeri-ui/ s3://admin.archie-beeri.arinamal.com/ --delete
