@@ -23,6 +23,7 @@ export class UsersService implements AbstractUsersService {
 
   constructor(private router: Router, private http: HttpClient, private authService: SocialAuthService) {
     this.baseUrl = environment.locationOrigin + "/api/rest/users/";
+    console.log("baseUrl = " + this.baseUrl)
   }
 
   login(username: string, password: string) {
@@ -50,6 +51,7 @@ export class UsersService implements AbstractUsersService {
 
   googleAuthenticate(socialUser: SocialUser): Observable<any> {
     let url = this.baseUrl + "authenticate-with-google";
+    console.log("google auth url is " + url)
     return this.http.post(url, socialUser, httpOptions)
       .pipe(catchError(this.handleError("googleAuthenticate", [])));
   }
