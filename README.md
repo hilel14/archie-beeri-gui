@@ -68,3 +68,8 @@ https://angular.io/guide/i18n
   * mv dist/archie-beeri-ui/* /var/www/archie/beeri
 * Remote
   * aws --profile=beeri s3 sync dist/archie-beeri-ui/ s3://admin.archie-beeri.arinamal.com/ --delete
+
+## Quick Build
+
+* npm install --save --legacy-peer-deps
+* ng build --prod

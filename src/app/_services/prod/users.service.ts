@@ -22,8 +22,8 @@ export class UsersService implements AbstractUsersService {
   private baseUrl: string;
 
   constructor(private router: Router, private http: HttpClient, private authService: SocialAuthService) {
-    this.baseUrl = environment.locationOrigin + "/api/rest/users/";
-    console.log("baseUrl = " + this.baseUrl)
+    this.baseUrl = environment.locationOrigin + "/rest/rest/users/";
+    console.log("baseUrl from user service = " + this.baseUrl)
   }
 
   login(username: string, password: string) {

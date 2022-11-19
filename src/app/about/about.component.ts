@@ -35,7 +35,7 @@ export class AboutComponent implements OnInit {
   }
 
   getApiVersion() {
-    let url = environment.locationOrigin + "/api/rest/about";
+    let url = environment.locationOrigin + "/rest/about";
     this.http.get(url)
       .subscribe((data: any) =>
         this.apiVersion = data["version"]);
