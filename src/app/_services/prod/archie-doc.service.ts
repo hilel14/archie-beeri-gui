@@ -28,7 +28,7 @@ export class ArchieDocumentService implements AbstractArchieDocService {
     console.log("baseUrl from doc service = " + environment.locationOrigin);
     this.docsUrl = environment.locationOrigin + "/docs?wt=json&indent=on";
     this.exportUrl = environment.locationOrigin + "/docs?wt=csv";
-    this.apiUrl = environment.locationOrigin + "/rest";
+    this.apiUrl = environment.locationOrigin + "/rest/rest";
   }
 
   getDcTypes(): Observable<any> {
@@ -58,6 +58,7 @@ export class ArchieDocumentService implements AbstractArchieDocService {
 
   getImportFolders(): Observable<any> {
     let url = this.apiUrl + "/docs/folders";
+    console.log("getImportFolders url = " + url)
     return this.http
       .get<any>(url)
       .pipe(catchError(this.handleError("getImportFolders", [])));

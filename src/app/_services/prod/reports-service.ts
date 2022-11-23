@@ -24,7 +24,7 @@ export class ReportsService implements AbstractReportsService {
   private apiUrl: string;
 
   constructor(private http: HttpClient) {
-    this.apiUrl = environment.locationOrigin + "/rest";
+    this.apiUrl = environment.locationOrigin + "/rest/rest";
   }
 
   getImportFoldersReport(): Observable<any> {
