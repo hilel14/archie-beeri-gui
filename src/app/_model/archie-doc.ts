@@ -5,7 +5,7 @@ export interface ArchieDoc {
   dcCreator?: Array<string>;
   dcDescription?: string;
   dcSubject?: Array<string>;
-  storageLocation?: string;
+  storageLocation2?: string;
   dcFormat?: string;
   dcType: string;
   dcIsPartOf: string;

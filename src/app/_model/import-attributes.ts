@@ -11,6 +11,6 @@ export class ImportAttributes {
   dcSubjects: string[];
   dcType: string;
   dcIsPartOf: string;
-  storageLocation: string;
+  storageLocation2: string;
   dcAccessRights: string;
 }

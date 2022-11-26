@@ -73,10 +73,10 @@
               {{subject}} |
             </span>
           </div>
-          <div fxLayout="row" *ngIf="element.storageLocation">
+          <div fxLayout="row" *ngIf="element.storageLocation2">
             <span class="labels">מיקום: </span>
             <span>
-              {{ element.storageLocation }}
+              {{ element.storageLocation2 }}
             </span>
           </div>
           <!-- perform operations on results -->
@@ -126,9 +126,9 @@
             <div class="highlightTitle">מילות החיפוש בתוכן: </div>
             <div [innerHTML]="getHighlighting(element.id,'content')"></div>
           </div>
-          <div *ngIf="getHighlighting(element.id,'storageLocation')">
+          <div *ngIf="getHighlighting(element.id,'storageLocation2')">
             <div class="highlightTitle">מילות החיפוש בשדה המיקום: </div>
-            <div [innerHTML]="getHighlighting(element.id,'storageLocation')"></div>
+            <div [innerHTML]="getHighlighting(element.id,'storageLocation2')"></div>
           </div>
         </div>
       </div>

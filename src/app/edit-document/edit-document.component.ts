@@ -129,7 +129,7 @@ export class EditDocumentComponent implements OnInit {
   saveDocument(): void {
     let record = {};
     // strings
-    ["dcTitle", "dcDate", "dcType", "dcDescription", "storageLocation", "dcIsPartOf", "dcAccessRights"].forEach((field) => {
+    ["dcTitle", "dcDate", "dcType", "dcDescription", "storageLocation2", "dcIsPartOf", "dcAccessRights"].forEach((field) => {
       if (this.doc[field] != this.orig[field]) {
         record[field] = this.doc[field];
       }

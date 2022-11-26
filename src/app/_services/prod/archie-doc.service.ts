@@ -70,7 +70,7 @@ export class ArchieDocumentService implements AbstractArchieDocService {
     rows: number,
     content: boolean
   ): Observable<any> {
-    let fieldList = "id,dcTitle,dcDate,dcCreator,dcDescription,dcSubject,storageLocation,dcFormat,dcType,dcIsPartOf,dcAccessRights,importTime";
+    let fieldList = "id,dcTitle,dcDate,dcCreator,dcDescription,dcSubject,storageLocation2,dcFormat,dcType,dcIsPartOf,dcAccessRights,importTime";
     if (content) {
       fieldList = fieldList + ",content";
     }
@@ -98,7 +98,7 @@ export class ArchieDocumentService implements AbstractArchieDocService {
       "&q.op=AND&" +
       searchParams +
       "&rows=" + totalDocumentsFound +
-      "&fl=id,dcTitle,dcDate,dcCreator,dcDescription,dcSubject,storageLocation,dcFormat,dcType,dcIsPartOf,dcAccessRights";
+      "&fl=id,dcTitle,dcDate,dcCreator,dcDescription,dcSubject,storageLocation2,dcFormat,dcType,dcIsPartOf,dcAccessRights";
     return this.http.get(url, {
       //headers: new HttpHeaders({ "Content-Type": "text/plain" })
       responseType: "text"

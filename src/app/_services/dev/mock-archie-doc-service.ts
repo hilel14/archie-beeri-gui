@@ -64,7 +64,7 @@ export class MockArchieDocService implements AbstractArchieDocService {
                         "dcFormat": "pdf",
                         "dcTitle": "סיפורי חיים 2017 - הספר",
                         "importTime": "2018-08-07T12:44:19.052Z",
-                        "storageLocation": "ארון 6 מדף 2",
+                        "storageLocation2": "ארון 6 מדף 2",
                         "dcAccessRights": "private",
                         "dcType": "text",
                         "dcIsPartOf": "כללי",
