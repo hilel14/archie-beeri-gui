@@ -114,6 +114,7 @@ export class ArchieDocumentService implements AbstractArchieDocService {
   }
 
   importFolder(importAttributes: ImportAttributes): Observable<any> {
+    console.debug("doc service importAttributes: " + JSON.stringify(importAttributes, null, 4));
     let url = this.apiUrl + "/docs/folder";
     return this.http
       .post(url, importAttributes, httpOptions)

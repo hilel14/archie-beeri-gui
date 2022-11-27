@@ -55,6 +55,7 @@ export class ImportFolderComponent implements OnInit {
   }
 
   import(): void {
+    console.debug("doc service importAttributes: " + JSON.stringify(this.importAttributes, null, 4));
     if (!this.validateUserInput()) {
       return;
     }
